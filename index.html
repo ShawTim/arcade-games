@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Arcade Games</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -19,6 +21,19 @@
                     <canvas id="tetris" width="300" height="600" tabindex="0"></canvas>
                     <!-- CRT Scanline Overlay -->
                     <div class="crt-overlay"></div>
+                </div>
+
+                <!-- Touch Controls (mobile only) -->
+                <div class="touch-controls">
+                    <div class="d-pad">
+                        <button class="touch-btn" id="btn-left">←</button>
+                        <button class="touch-btn" id="btn-down">↓</button>
+                        <button class="touch-btn" id="btn-right">→</button>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="touch-btn action" id="btn-rotate">ROTATE</button>
+                        <button class="touch-btn action" id="btn-drop">DROP</button>
+                    </div>
                 </div>
             </div>
 
@@ -52,6 +67,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=4"></script>
+    <script src="game.js?v=5"></script>
 </body>
 </html>

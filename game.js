@@ -426,45 +426,141 @@ class InputController {
                 e.preventDefault();
             }
 
-            // Handle start screen
-            if (!this.game.state.started) {
-                if (e.key === 's' || e.key === 'S') {
-                    this.game.state.start();
-                    this.game.initGame();
-                }
-                return;
-            }
-
-            if (this.game.state.gameOver) {
-                if (e.key === 'r' || e.key === 'R') {
-                    this.game.restart();
-                }
-                return;
-            }
-
-            if (e.key === 'p' || e.key === 'P') {
-                this.game.togglePause();
-                return;
-            }
-
-            if (this.game.state.paused) return;
-
-            switch(e.key) {
-                case 'ArrowLeft':
-                    this.game.movePiece(-1, 0);
-                    break;
-                case 'ArrowRight':
-                    this.game.movePiece(1, 0);
-                    break;
-                case 'ArrowDown':
-                    this.game.movePiece(0, 1);
-                    break;
-                case 'ArrowUp':
-                case ' ':
-                    this.game.rotatePiece();
-                    break;
-            }
+            this.handleInput(e.key);
         });
+
+        // Setup touch controls
+        this.setupTouchControls();
+    }
+
+    setupTouchControls() {
+        const touchButtons = {
+            'btn-left': 'LEFT',
+            'btn-right': 'RIGHT', 
+            'btn-down': 'DOWN',
+            'btn-rotate': 'ROTATE',
+            'btn-drop': 'DROP'
+        };
+
+        for (const [id, action] of Object.entries(touchButtons)) {
+            const btn = document.getElementById(id);
+            if (btn) {
+                // Prevent default touch behavior (zoom, scroll)
+                btn.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.handleTouchAction(action);
+                    btn.classList.add('active');
+                }, { passive: false });
+
+                btn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    btn.classList.remove('active');
+                }, { passive: false });
+
+                // Also support mouse clicks for testing on desktop
+                btn.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    this.handleTouchAction(action);
+                });
+            }
+        }
+    }
+
+    handleTouchAction(action) {
+        // Handle start screen
+        if (!this.game.state.started) {
+            if (action === 'ROTATE' || action === 'DROP') {
+                this.game.state.start();
+                this.game.initGame();
+            }
+            return;
+        }
+
+        if (this.game.state.gameOver) {
+            if (action === 'DROP') {
+                this.game.restart();
+            }
+            return;
+        }
+
+        if (this.game.state.paused) {
+            if (action === 'ROTATE' || action === 'DROP') {
+                this.game.togglePause();
+            }
+            return;
+        }
+
+        // Game actions
+        switch(action) {
+            case 'LEFT':
+                this.game.movePiece(-1, 0);
+                break;
+            case 'RIGHT':
+                this.game.movePiece(1, 0);
+                break;
+            case 'DOWN':
+                this.game.movePiece(0, 1);
+                break;
+            case 'ROTATE':
+                this.game.rotatePiece();
+                break;
+            case 'DROP':
+                // Hard drop - move piece all the way down
+                this.hardDrop();
+                break;
+        }
+    }
+
+    hardDrop() {
+        while (!this.game.board.collide({
+            shape: this.game.currentPiece.shape,
+            x: this.game.currentPiece.x,
+            y: this.game.currentPiece.y + 1
+        })) {
+            this.game.currentPiece.y++;
+        }
+        this.game.dropPiece();
+    }
+
+    handleInput(key) {
+        // Handle start screen
+        if (!this.game.state.started) {
+            if (key === 's' || key === 'S') {
+                this.game.state.start();
+                this.game.initGame();
+            }
+            return;
+        }
+
+        if (this.game.state.gameOver) {
+            if (key === 'r' || key === 'R') {
+                this.game.restart();
+            }
+            return;
+        }
+
+        if (key === 'p' || key === 'P') {
+            this.game.togglePause();
+            return;
+        }
+
+        if (this.game.state.paused) return;
+
+        switch(key) {
+            case 'ArrowLeft':
+                this.game.movePiece(-1, 0);
+                break;
+            case 'ArrowRight':
+                this.game.movePiece(1, 0);
+                break;
+            case 'ArrowDown':
+                this.game.movePiece(0, 1);
+                break;
+            case 'ArrowUp':
+            case ' ':
+                this.game.rotatePiece();
+                break;
+        }
     }
 
     // Interface for CV integration

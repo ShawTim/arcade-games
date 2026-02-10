@@ -18,6 +18,8 @@ body {
     padding: 10px;
     position: relative;
     overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
 }
 
 /* Hide scrollbars but keep scrollable */
@@ -371,4 +373,169 @@ body::after {
         0 3px 0 #1a1a2e;
     margin: 0 2px;
     display: inline-block;
+}
+
+/* ===== Touch Controls (Mobile) ===== */
+.touch-controls {
+    display: none; /* Hidden by default on desktop */
+    width: 100%;
+    padding: 15px 10px;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.d-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.d-pad .touch-btn:nth-child(1) { grid-column: 1; grid-row: 2; } /* Left */
+.d-pad .touch-btn:nth-child(2) { grid-column: 2; grid-row: 2; } /* Down */
+.d-pad .touch-btn:nth-child(3) { grid-column: 3; grid-row: 2; } /* Right */
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.touch-btn {
+    width: 65px;
+    height: 55px;
+    background: linear-gradient(145deg, #2a2a4e 0%, #1a1a3e 100%);
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    color: #00ffff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 16px;
+    text-shadow: 0 0 10px #00ffff;
+    box-shadow: 
+        0 0 15px rgba(0, 255, 255, 0.3),
+        inset 0 0 20px rgba(0, 255, 255, 0.1);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.touch-btn:active {
+    background: linear-gradient(145deg, #00ffff 0%, #0088cc 100%);
+    color: #000;
+    box-shadow: 
+        0 0 25px rgba(0, 255, 255, 0.8),
+        inset 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95);
+}
+
+.touch-btn.action {
+    width: 90px;
+    height: 50px;
+    font-size: 10px;
+    border-color: #ff00ff;
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff;
+    box-shadow: 
+        0 0 15px rgba(255, 0, 255, 0.3),
+        inset 0 0 20px rgba(255, 0, 255, 0.1);
+}
+
+.touch-btn.action:active {
+    background: linear-gradient(145deg, #ff00ff 0%, #cc00cc 100%);
+    color: #fff;
+    box-shadow: 
+        0 0 25px rgba(255, 0, 255, 0.8);
+}
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 5px;
+        touch-action: none;
+        overscroll-behavior: none;
+    }
+    
+    .arcade-cabinet {
+        padding: 25px 15px 20px 15px;
+        min-height: auto;
+        max-height: 100vh;
+        width: 100%;
+    }
+    
+    .arcade-cabinet::before {
+        font-size: 10px;
+        top: 6px;
+    }
+    
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    /* Resize canvas for mobile */
+    #tetris {
+        width: 260px;
+        height: 520px;
+    }
+    
+    .screen-bezel {
+        padding: 10px;
+    }
+    
+    .crt-overlay {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    /* Show touch controls */
+    .touch-controls {
+        display: flex;
+    }
+    
+    /* Reposition info panel for portrait */
+    .info-panel {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 10px;
+    }
+    
+    .info-panel .section {
+        flex: 1;
+        min-width: 100px;
+        padding: 10px;
+    }
+    
+    .info-panel .section:nth-child(3) {
+        display: none; /* Hide keyboard controls section on mobile */
+    }
+    
+    .section h3 {
+        font-size: 8px;
+        margin-bottom: 8px;
+        padding-bottom: 5px;
+    }
+    
+    .section p {
+        font-size: 7px;
+        margin: 5px 0;
+    }
+    
+    .section span {
+        font-size: 10px;
+    }
+    
+    #nextPiece {
+        width: 80px;
+        height: 80px;
+        margin: 5px auto;
+    }
 }
