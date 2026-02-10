@@ -408,11 +408,6 @@ class Renderer {
         this.ctx.fillStyle = '#666';
         this.ctx.font = '10px "Press Start 2P", monospace';
         this.ctx.fillText('VER 1.0', this.canvas.width / 2, this.canvas.height - 30);
-        
-        // Insert coin style text
-        this.ctx.fillStyle = '#888';
-        this.ctx.font = '8px "Press Start 2P", monospace';
-        this.ctx.fillText('CREDIT 00', 30, this.canvas.height - 10);
     }
 }
 
@@ -511,6 +506,8 @@ class TetrisGame {
 
     init() {
         // Don't create pieces yet - wait for game to start
+        // Focus canvas to receive keyboard events
+        this.canvas.focus();
         this.update();
     }
 

@@ -20,6 +20,18 @@ body {
     overflow: hidden;
 }
 
+/* 隱藏滾動條但保持可滾動 */
+body::-webkit-scrollbar,
+.arcade-cabinet::-webkit-scrollbar,
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+body, .arcade-cabinet, .container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 /* 深色復古背景 */
 body::before {
     content: '';
@@ -45,7 +57,7 @@ body::after {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    opacity: 0.15;
+    opacity: 0.75;
     z-index: -1;
     pointer-events: none;
 }
@@ -54,7 +66,7 @@ body::after {
 .arcade-cabinet {
     background: linear-gradient(145deg, #2a2a3e 0%, #1a1a2e 50%, #0f0f1a 100%);
     padding: 30px 40px 40px 40px;
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
     position: relative;
     box-shadow: 
         0 0 0 8px #1a1a2e,
@@ -62,12 +74,12 @@ body::after {
         0 20px 60px rgba(0, 0, 0, 0.8),
         inset 0 0 100px rgba(0, 0, 0, 0.5);
     max-height: 90vh;
-    overflow: auto;
+    min-height: 780px;
 }
 
 /* 機台頂部裝飾 */
 .arcade-cabinet::before {
-    content: '★ ARCADE GAMES ★';
+    content: '★ TETRIS ★';
     position: absolute;
     top: 10px;
     left: 50%;
@@ -79,19 +91,6 @@ body::after {
         0 0 20px #ff00ff,
         0 0 30px #ff00ff;
     letter-spacing: 3px;
-}
-
-/* 機台側邊裝飾線 */
-.arcade-cabinet::after {
-    content: '';
-    position: absolute;
-    left: 15px;
-    right: 15px;
-    top: 35px;
-    bottom: 20px;
-    border: 2px solid rgba(0, 255, 255, 0.3);
-    border-radius: 10px;
-    pointer-events: none;
 }
 
 /* 霓虹邊框光效 */
@@ -246,19 +245,6 @@ body::after {
     gap: 15px;
 }
 
-.info-panel h2 {
-    color: #00ffff;
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 10px;
-    text-shadow: 
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        0 0 30px #00ffff;
-    animation: title-glow 2s ease-in-out infinite alternate;
-    letter-spacing: 2px;
-}
-
 @keyframes title-glow {
     from { 
         text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
@@ -280,29 +266,6 @@ body::after {
         0 0 15px rgba(0, 255, 255, 0.2),
         inset 0 0 20px rgba(0, 0, 0, 0.5);
     position: relative;
-}
-
-/* 區塊角落裝飾 */
-.section::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid #ff00ff;
-    border-left: 2px solid #ff00ff;
-}
-
-.section::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    right: -2px;
-    width: 10px;
-    height: 10px;
-    border-bottom: 2px solid #ff00ff;
-    border-right: 2px solid #ff00ff;
 }
 
 .section h3 {
@@ -408,39 +371,4 @@ body::after {
         0 3px 0 #1a1a2e;
     margin: 0 2px;
     display: inline-block;
-}
-
-/* 投幣孔裝飾 */
-.coin-slot {
-    width: 60px;
-    height: 80px;
-    background: linear-gradient(145deg, #1a1a2e 0%, #0a0a0f 100%);
-    border: 3px solid #444;
-    border-radius: 5px;
-    margin: 20px auto;
-    position: relative;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
-}
-
-.coin-slot::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 8px;
-    background: #222;
-    border-radius: 4px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.8);
-}
-
-.coin-slot::after {
-    content: '25¢';
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 10px;
-    color: #888;
 }

@@ -16,19 +16,14 @@
             <div class="game-area">
                 <!-- 螢幕外框 -->
                 <div class="screen-bezel">
-                    <canvas id="tetris" width="300" height="600"></canvas>
+                    <canvas id="tetris" width="300" height="600" tabindex="0"></canvas>
                     <!-- CRT 掃描線覆蓋層 -->
                     <div class="crt-overlay"></div>
                 </div>
-                
-                <!-- 投幣孔裝飾 -->
-                <div class="coin-slot"></div>
             </div>
 
             <!-- 側邊資訊面板 -->
             <div class="info-panel">
-                <h2>Tetris</h2>
-                
                 <!-- 遊戲狀態 -->
                 <div class="section">
                     <h3>Game Status</h3>
@@ -53,17 +48,10 @@
                     <p><kbd>P</kbd> : Pause</p>
                     <p><kbd>R</kbd> : Restart</p>
                 </div>
-
-                <!-- CV 整合區域（保留） -->
-                <div class="section cv-section">
-                    <h3>CV Control (Reserved)</h3>
-                    <div id="cvStatus">Awaiting CV integration...</div>
-                    <div id="cvDebug"></div>
-                </div>
             </div>
         </div>
     </div>
 
-    <script src="game.js"></script>
+    <script src="game.js?v=2"></script>
 </body>
 </html>
