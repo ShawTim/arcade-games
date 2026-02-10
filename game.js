@@ -451,27 +451,72 @@ class InputController {
             'btn-rotate': 'ROTATE'
         };
 
+        // Track intervals for repeat actions
+        this.repeatIntervals = {};
+
         for (const [id, action] of Object.entries(touchButtons)) {
             const btn = document.getElementById(id);
             if (btn) {
                 // Prevent default touch behavior (zoom, scroll)
-                btn.addEventListener('touchstart', (e) => {
+                const startAction = (e) => {
                     e.preventDefault();
-                    this.handleTouchAction(action);
                     btn.classList.add('active');
-                }, { passive: false });
+                    
+                    // Execute immediately
+                    this.handleTouchAction(action);
+                    
+                    // Set up repeat for LEFT/RIGHT/DOWN (not ROTATE)
+                    if (action !== 'ROTATE' && !this.repeatIntervals[action]) {
+                        this.repeatIntervals[action] = setInterval(() => {
+                            if (this.game.state.started && !this.game.state.gameOver && !this.game.state.paused) {
+                                this.handleTouchAction(action);
+                            }
+                        }, 100); // Repeat every 100ms
+                    }
+                };
 
-                btn.addEventListener('touchend', (e) => {
-                    e.preventDefault();
+                const endAction = (e) => {
+                    if (e) e.preventDefault();
                     btn.classList.remove('active');
-                }, { passive: false });
+                    
+                    // Clear repeat interval
+                    if (this.repeatIntervals[action]) {
+                        clearInterval(this.repeatIntervals[action]);
+                        this.repeatIntervals[action] = null;
+                    }
+                };
+
+                btn.addEventListener('touchstart', startAction, { passive: false });
+                btn.addEventListener('touchend', endAction, { passive: false });
+                btn.addEventListener('touchcancel', endAction, { passive: false });
 
                 // Also support mouse clicks for testing on desktop
-                btn.addEventListener('mousedown', (e) => {
-                    e.preventDefault();
-                    this.handleTouchAction(action);
-                });
+                btn.addEventListener('mousedown', startAction);
+                btn.addEventListener('mouseup', endAction);
+                btn.addEventListener('mouseleave', endAction);
             }
+        }
+
+        // Add tap-to-start on canvas for mobile
+        const canvas = document.getElementById('tetris');
+        if (canvas) {
+            const tapToStart = (e) => {
+                // Only handle if game not started, game over, or paused
+                if (!this.game.state.started || this.game.state.gameOver || this.game.state.paused) {
+                    e.preventDefault();
+                    if (!this.game.state.started) {
+                        this.game.state.start();
+                        this.game.initGame();
+                    } else if (this.game.state.gameOver) {
+                        this.game.restart();
+                    } else if (this.game.state.paused) {
+                        this.game.togglePause();
+                    }
+                }
+            };
+
+            canvas.addEventListener('touchstart', tapToStart, { passive: false });
+            canvas.addEventListener('click', tapToStart);
         }
     }
 
