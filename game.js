@@ -429,7 +429,7 @@ class InputController {
             // Handle start screen
             if (!this.game.state.started) {
                 if (e.key === 's' || e.key === 'S') {
-                    this.game.start();
+                    this.game.state.start();
                     this.game.initGame();
                 }
                 return;

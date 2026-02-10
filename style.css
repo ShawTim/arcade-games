@@ -1,7 +1,7 @@
-/* 導入復古像素字體 */
+/* Import retro pixel font */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-/* 全局樣式 */
+/* Global styles */
 * {
     margin: 0;
     padding: 0;
@@ -20,7 +20,7 @@ body {
     overflow: hidden;
 }
 
-/* 隱藏滾動條但保持可滾動 */
+/* Hide scrollbars but keep scrollable */
 body::-webkit-scrollbar,
 .arcade-cabinet::-webkit-scrollbar,
 .container::-webkit-scrollbar {
@@ -32,7 +32,7 @@ body, .arcade-cabinet, .container {
     scrollbar-width: none;
 }
 
-/* 深色復古背景 */
+/* Dark retro background */
 body::before {
     content: '';
     position: fixed;
@@ -45,7 +45,7 @@ body::before {
     z-index: -2;
 }
 
-/* 劍龍像素背景圖 */
+/* Stegosaurus pixel background */
 body::after {
     content: '';
     position: fixed;
@@ -62,7 +62,7 @@ body::after {
     pointer-events: none;
 }
 
-/* ===== 街機機台外框 ===== */
+/* ===== Arcade Cabinet Frame ===== */
 .arcade-cabinet {
     background: linear-gradient(145deg, #2a2a3e 0%, #1a1a2e 50%, #0f0f1a 100%);
     padding: 30px 40px 40px 40px;
@@ -77,7 +77,7 @@ body::after {
     min-height: 780px;
 }
 
-/* 機台頂部裝飾 */
+/* Cabinet top decoration */
 .arcade-cabinet::before {
     content: '★ TETRIS ★';
     position: absolute;
@@ -93,7 +93,7 @@ body::after {
     letter-spacing: 3px;
 }
 
-/* 霓虹邊框光效 */
+/* Neon border glow effect */
 .neon-border {
     position: absolute;
     top: -2px;
@@ -125,7 +125,7 @@ body::after {
         0 0 30px rgba(0, 255, 255, 0.2);
 }
 
-/* 螢幕外框（塑膠感） */
+/* Screen bezel (plastic feel) */
 .screen-bezel {
     background: linear-gradient(145deg, #3a3a4e 0%, #1a1a2e 100%);
     padding: 15px;
@@ -136,7 +136,7 @@ body::after {
     position: relative;
 }
 
-/* 螢幕玻璃反光 */
+/* Screen glass reflection */
 .screen-bezel::before {
     content: '';
     position: absolute;
@@ -154,7 +154,7 @@ body::after {
     z-index: 20;
 }
 
-/* 遊戲區域 */
+/* Game area */
 .game-area {
     display: flex;
     flex-direction: column;
@@ -162,7 +162,7 @@ body::after {
     position: relative;
 }
 
-/* ===== CRT 螢幕效果 ===== */
+/* ===== CRT Screen Effects ===== */
 #tetris {
     border-radius: 10px;
     background: #000;
@@ -173,7 +173,7 @@ body::after {
     display: block;
 }
 
-/* CRT 掃描線 */
+/* CRT scanlines */
 .crt-overlay {
     position: absolute;
     top: 15px;
@@ -203,13 +203,13 @@ body::after {
     animation: scanlines 8s linear infinite;
 }
 
-/* 掃描線移動效果 */
+/* Scanline movement effect */
 @keyframes scanlines {
     0% { transform: translateY(0); }
     100% { transform: translateY(4px); }
 }
 
-/* CRT 螢幕曲率 */
+/* CRT screen curvature */
 .crt-overlay::after {
     content: '';
     position: absolute;
@@ -226,7 +226,7 @@ body::after {
     box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
 }
 
-/* 螢幕閃爍 */
+/* Screen flicker */
 .screen-flicker {
     animation: flicker 0.12s infinite;
 }
@@ -237,7 +237,7 @@ body::after {
     100% { opacity: 0.98; }
 }
 
-/* ===== 側邊資訊面板 ===== */
+/* ===== Side Info Panel ===== */
 .info-panel {
     width: 280px;
     display: flex;
@@ -256,7 +256,7 @@ body::after {
     }
 }
 
-/* 資訊區塊 */
+/* Info section */
 .section {
     background: linear-gradient(145deg, rgba(0, 20, 40, 0.95) 0%, rgba(0, 10, 20, 0.95) 100%);
     padding: 15px;
@@ -295,7 +295,7 @@ body::after {
         0 0 10px #ffff00;
 }
 
-/* 下一個方塊預覽 */
+/* Next piece preview */
 #nextPiece {
     background: #000;
     border: 3px solid #00ffff;
@@ -307,7 +307,7 @@ body::after {
         inset 0 0 20px rgba(0, 255, 255, 0.1);
 }
 
-/* ===== 開始畫面文字閃爍 ===== */
+/* ===== Start Screen Text Blink ===== */
 .blink-text {
     animation: blink 1s step-end infinite;
 }
@@ -317,7 +317,7 @@ body::after {
     50% { opacity: 0; }
 }
 
-/* ===== 響應式設計 ===== */
+/* ===== Responsive Design ===== */
 @media (max-width: 768px) {
     .arcade-cabinet {
         padding: 30px 20px 40px 20px;
@@ -347,7 +347,7 @@ body::after {
     }
 }
 
-/* 遊戲結束時的效果 */
+/* Game over effect */
 .game-over {
     animation: game-over-flash 0.5s ease-in-out infinite;
 }
@@ -357,7 +357,7 @@ body::after {
     50% { filter: brightness(0.5); }
 }
 
-/* 控制說明的鍵盤按鈕樣式 */
+/* Keyboard button styles for controls */
 .section p kbd {
     background: linear-gradient(145deg, #3a3a4e 0%, #2a2a3e 100%);
     border: 2px solid #00ffff;

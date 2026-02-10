@@ -7,24 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 街機機台外框 -->
+    <!-- Arcade Cabinet Frame -->
     <div class="arcade-cabinet">
         <div class="neon-border"></div>
         
         <div class="container">
-            <!-- 遊戲區域 -->
+            <!-- Game Area -->
             <div class="game-area">
-                <!-- 螢幕外框 -->
+                <!-- Screen Bezel -->
                 <div class="screen-bezel">
                     <canvas id="tetris" width="300" height="600" tabindex="0"></canvas>
-                    <!-- CRT 掃描線覆蓋層 -->
+                    <!-- CRT Scanline Overlay -->
                     <div class="crt-overlay"></div>
                 </div>
             </div>
 
-            <!-- 側邊資訊面板 -->
+            <!-- Side Info Panel -->
             <div class="info-panel">
-                <!-- 遊戲狀態 -->
+                <!-- Game Status -->
                 <div class="section">
                     <h3>Game Status</h3>
                     <p>Score: <span id="score">0</span></p>
@@ -32,13 +32,13 @@
                     <p>Lines: <span id="lines">0</span></p>
                 </div>
 
-                <!-- 下一個方塊預覽 -->
+                <!-- Next Piece Preview -->
                 <div class="section">
                     <h3>Next Piece</h3>
                     <canvas id="nextPiece" width="120" height="120"></canvas>
                 </div>
 
-                <!-- 控制說明 -->
+                <!-- Controls Instructions -->
                 <div class="section">
                     <h3>Controls</h3>
                     <p><kbd>←</kbd> <kbd>→</kbd> : Move</p>
@@ -52,6 +52,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=2"></script>
+    <script src="game.js?v=4"></script>
 </body>
 </html>
