@@ -1,0 +1,145 @@
+/* 簡化版復古樣式 - 優先確保功能正常 */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background: #0a0a0f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+/* 街機機台外框 */
+.arcade-cabinet {
+    background: linear-gradient(145deg, #2a2a3e 0%, #1a1a2e 100%);
+    padding: 25px 35px 35px 35px;
+    border-radius: 15px 15px 0 0;
+    border: 4px solid #333;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
+/* 機台頂部 */
+.arcade-cabinet::before {
+    content: '★ ARCADE GAMES ★';
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #ff00ff;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #ff00ff;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    background: #000;
+    padding: 20px;
+    border-radius: 8px;
+    border: 3px solid #444;
+}
+
+/* 遊戲區域 */
+.game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CRT 螢幕 */
+#tetris {
+    border: 4px solid #333;
+    border-radius: 8px;
+    background: #000;
+    display: block;
+}
+
+/* 簡化掃描線 */
+.crt-overlay {
+    display: none; /* 先隱藏，避免影響效能 */
+}
+
+/* 側邊面板 */
+.info-panel {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-panel h2 {
+    color: #00ffff;
+    font-size: 16px;
+    text-align: center;
+    text-shadow: 0 0 10px #00ffff;
+    margin-bottom: 5px;
+}
+
+.section {
+    background: rgba(0, 20, 40, 0.9);
+    padding: 12px;
+    border-radius: 6px;
+    border: 2px solid #00ffff;
+}
+
+.section h3 {
+    color: #ff00ff;
+    font-size: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ff00ff;
+    padding-bottom: 5px;
+}
+
+.section p {
+    color: #00ff00;
+    margin: 8px 0;
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+.section span {
+    color: #ffff00;
+    font-size: 14px;
+}
+
+#nextPiece {
+    background: #000;
+    border: 2px solid #00ffff;
+    border-radius: 6px;
+    display: block;
+    margin: 8px auto;
+}
+
+/* 按鍵樣式 */
+kbd {
+    background: #333;
+    border: 1px solid #00ffff;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-size: 8px;
+    color: #00ffff;
+}
+
+/* 響應式 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .info-panel {
+        width: 100%;
+    }
+}
+
+/* 投幣孔 */
+.coin-slot {
+    display: none; /* 先隱藏，簡化布局 */
+}

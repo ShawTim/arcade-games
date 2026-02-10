@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Games</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 街機機台外框 -->
+    <div class="arcade-cabinet">
+        <div class="neon-border"></div>
+        
+        <div class="container">
+            <!-- 遊戲區域 -->
+            <div class="game-area">
+                <!-- 螢幕外框 -->
+                <div class="screen-bezel">
+                    <canvas id="tetris" width="300" height="600"></canvas>
+                    <!-- CRT 掃描線覆蓋層 -->
+                    <div class="crt-overlay"></div>
+                </div>
+                
+                <!-- 投幣孔裝飾 -->
+                <div class="coin-slot"></div>
+            </div>
+
+            <!-- 側邊資訊面板 -->
+            <div class="info-panel">
+                <h2>Tetris</h2>
+                
+                <!-- 遊戲狀態 -->
+                <div class="section">
+                    <h3>Game Status</h3>
+                    <p>Score: <span id="score">0</span></p>
+                    <p>Level: <span id="level">1</span></p>
+                    <p>Lines: <span id="lines">0</span></p>
+                </div>
+
+                <!-- 下一個方塊預覽 -->
+                <div class="section">
+                    <h3>Next Piece</h3>
+                    <canvas id="nextPiece" width="120" height="120"></canvas>
+                </div>
+
+                <!-- 控制說明 -->
+                <div class="section">
+                    <h3>Controls</h3>
+                    <p><kbd>←</kbd> <kbd>→</kbd> : Move</p>
+                    <p><kbd>↓</kbd> : Soft Drop</p>
+                    <p><kbd>↑</kbd> / <kbd>Space</kbd> : Rotate</p>
+                    <p><kbd>S</kbd> : Start Game</p>
+                    <p><kbd>P</kbd> : Pause</p>
+                    <p><kbd>R</kbd> : Restart</p>
+                </div>
+
+                <!-- CV 整合區域（保留） -->
+                <div class="section cv-section">
+                    <h3>CV Control (Reserved)</h3>
+                    <div id="cvStatus">Awaiting CV integration...</div>
+                    <div id="cvDebug"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

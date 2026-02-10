@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120">
+  <!-- 16-bit 像素劍龍 -->
+  <g fill="#00ffff">
+    <!-- 身體 -->
+    <rect x="60" y="70" width="80" height="20"/>
+    <!-- 頭 -->
+    <rect x="40" y="70" width="20" height="15"/>
+    <rect x="30" y="75" width="10" height="10"/>
+    <!-- 尾巴 -->
+    <rect x="140" y="75" width="20" height="10"/>
+    <rect x="160" y="78" width="15" height="6"/>
+    <rect x="175" y="80" width="10" height="4"/>
+    <!-- 背板 1 -->
+    <polygon points="70,70 75,50 80,70"/>
+    <!-- 背板 2 -->
+    <polygon points="85,70 90,45 95,70"/>
+    <!-- 背板 3 -->
+    <polygon points="100,70 105,40 110,70"/>
+    <!-- 背板 4 -->
+    <polygon points="115,70 120,45 125,70"/>
+    <!-- 背板 5 -->
+    <polygon points="130,70 135,50 140,70"/>
+    <!-- 腿 1 -->
+    <rect x="65" y="90" width="10" height="20"/>
+    <!-- 腿 2 -->
+    <rect x="85" y="90" width="10" height="20"/>
+    <!-- 腿 3 -->
+    <rect x="110" y="90" width="10" height="20"/>
+    <!-- 腿 4 -->
+    <rect x="130" y="90" width="10" height="20"/>
+    <!-- 尾巴尖刺 -->
+    <polygon points="178,80 185,75 185,85"/>
+  </g>
+</svg>
