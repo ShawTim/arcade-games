@@ -491,24 +491,41 @@ body::after {
 
     /* Resize canvas for mobile */
     #tetris {
-        width: 260px;
-        height: 520px;
+        width: 240px;
+        height: 480px;
     }
     
     .screen-bezel {
-        padding: 10px;
+        padding: 8px;
     }
     
     .crt-overlay {
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
+        top: 8px;
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
     }
 
     /* Show touch controls */
     .touch-controls {
         display: flex;
+        padding: 10px 5px;
+        gap: 8px;
+    }
+    
+    .touch-btn {
+        width: 60px;
+        height: 50px;
+    }
+    
+    .touch-btn .arrow {
+        font-size: 20px;
+    }
+    
+    .touch-btn.action {
+        width: 60px;
+        height: 50px;
+        font-size: 9px;
     }
     
     /* Reposition info panel for portrait - move to top */
@@ -519,13 +536,14 @@ body::after {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-around;
-        gap: 10px;
+        gap: 8px;
+        margin-bottom: 5px;
     }
     
     .info-panel .section {
         flex: 1;
-        min-width: 100px;
-        padding: 10px;
+        min-width: 80px;
+        padding: 8px;
     }
     
     .info-panel .section:nth-child(3) {
@@ -533,23 +551,23 @@ body::after {
     }
     
     .section h3 {
-        font-size: 8px;
-        margin-bottom: 8px;
-        padding-bottom: 5px;
+        font-size: 7px;
+        margin-bottom: 5px;
+        padding-bottom: 3px;
     }
     
     .section p {
-        font-size: 7px;
-        margin: 5px 0;
+        font-size: 6px;
+        margin: 3px 0;
     }
     
     .section span {
-        font-size: 10px;
+        font-size: 8px;
     }
     
     #nextPiece {
-        width: 80px;
-        height: 80px;
-        margin: 5px auto;
+        width: 50px;
+        height: 50px;
+        margin: 3px auto;
     }
 }
