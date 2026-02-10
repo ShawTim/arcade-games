@@ -330,7 +330,12 @@ class Renderer {
         this.ctx.fillText('GAME OVER', this.canvas.width / 2, this.canvas.height / 2 - 20);
         
         this.ctx.font = '20px Arial';
-        this.ctx.fillText('Press R to Restart', this.canvas.width / 2, this.canvas.height / 2 + 30);
+        const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
+        if (isMobile) {
+            this.ctx.fillText('TAP TO RESTART', this.canvas.width / 2, this.canvas.height / 2 + 30);
+        } else {
+            this.ctx.fillText('Press R to Restart', this.canvas.width / 2, this.canvas.height / 2 + 30);
+        }
     }
 
     // Draw paused screen
@@ -385,14 +390,19 @@ class Renderer {
         this.ctx.fillText('TETRIS', this.canvas.width / 2, this.canvas.height / 2 - 10);
         this.ctx.shadowBlur = 0;
         
-        // Blinking PRESS S TO START
+        // Blinking PRESS S TO START / TAP TO START
         if (blink) {
+            const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
             this.ctx.fillStyle = '#ff0';
             this.ctx.font = 'bold 16px "Press Start 2P", monospace';
             this.ctx.shadowColor = '#ff0';
             this.ctx.shadowBlur = 15;
-            this.ctx.fillText('PRESS S', this.canvas.width / 2, this.canvas.height / 2 + 50);
-            this.ctx.fillText('TO START', this.canvas.width / 2, this.canvas.height / 2 + 75);
+            if (isMobile) {
+                this.ctx.fillText('TAP TO START', this.canvas.width / 2, this.canvas.height / 2 + 60);
+            } else {
+                this.ctx.fillText('PRESS S', this.canvas.width / 2, this.canvas.height / 2 + 50);
+                this.ctx.fillText('TO START', this.canvas.width / 2, this.canvas.height / 2 + 75);
+            }
             this.ctx.shadowBlur = 0;
         }
         
@@ -438,8 +448,7 @@ class InputController {
             'btn-left': 'LEFT',
             'btn-right': 'RIGHT', 
             'btn-down': 'DOWN',
-            'btn-rotate': 'ROTATE',
-            'btn-drop': 'DROP'
+            'btn-rotate': 'ROTATE'
         };
 
         for (const [id, action] of Object.entries(touchButtons)) {
@@ -467,26 +476,20 @@ class InputController {
     }
 
     handleTouchAction(action) {
-        // Handle start screen
+        // Handle start screen - any button starts
         if (!this.game.state.started) {
-            if (action === 'ROTATE' || action === 'DROP') {
-                this.game.state.start();
-                this.game.initGame();
-            }
+            this.game.state.start();
+            this.game.initGame();
             return;
         }
 
         if (this.game.state.gameOver) {
-            if (action === 'DROP') {
-                this.game.restart();
-            }
+            this.game.restart();
             return;
         }
 
         if (this.game.state.paused) {
-            if (action === 'ROTATE' || action === 'DROP') {
-                this.game.togglePause();
-            }
+            this.game.togglePause();
             return;
         }
 
@@ -504,22 +507,7 @@ class InputController {
             case 'ROTATE':
                 this.game.rotatePiece();
                 break;
-            case 'DROP':
-                // Hard drop - move piece all the way down
-                this.hardDrop();
-                break;
         }
-    }
-
-    hardDrop() {
-        while (!this.game.board.collide({
-            shape: this.game.currentPiece.shape,
-            x: this.game.currentPiece.x,
-            y: this.game.currentPiece.y + 1
-        })) {
-            this.game.currentPiece.y++;
-        }
-        this.game.dropPiece();
     }
 
     handleInput(key) {

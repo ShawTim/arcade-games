@@ -380,37 +380,20 @@ body::after {
     display: none; /* Hidden by default on desktop */
     width: 100%;
     padding: 15px 10px;
-    gap: 20px;
+    gap: 12px;
     align-items: center;
-    justify-content: space-between;
-}
-
-.d-pad {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 8px;
-}
-
-.d-pad .touch-btn:nth-child(1) { grid-column: 1; grid-row: 2; } /* Left */
-.d-pad .touch-btn:nth-child(2) { grid-column: 2; grid-row: 2; } /* Down */
-.d-pad .touch-btn:nth-child(3) { grid-column: 3; grid-row: 2; } /* Right */
-
-.action-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: center;
 }
 
 .touch-btn {
-    width: 65px;
-    height: 55px;
+    width: 75px;
+    height: 60px;
     background: linear-gradient(145deg, #2a2a4e 0%, #1a1a3e 100%);
     border: 2px solid #00ffff;
     border-radius: 10px;
     color: #00ffff;
     font-family: 'Press Start 2P', monospace;
-    font-size: 16px;
+    font-size: 14px;
     text-shadow: 0 0 10px #00ffff;
     box-shadow: 
         0 0 15px rgba(0, 255, 255, 0.3),
@@ -419,6 +402,36 @@ body::after {
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section span.arrow-left {
+    display: block;
+    text-shadow: inherit;
+    font-size: inherit;
+    color: inherit;
+    transform: rotate(-90deg);
+}
+
+.section span.arrow-right {
+    display: block;
+    text-shadow: inherit;
+    font-size: inherit;
+    color: inherit;
+    transform: rotate(90deg);
+}
+
+/* Touch control arrows */
+.touch-btn .arrow-left {
+    display: inline-block;
+    transform: rotate(-90deg);
+}
+
+.touch-btn .arrow-right {
+    display: inline-block;
+    transform: rotate(90deg);
 }
 
 .touch-btn:active {
@@ -431,8 +444,8 @@ body::after {
 }
 
 .touch-btn.action {
-    width: 90px;
-    height: 50px;
+    width: 75px;
+    height: 60px;
     font-size: 10px;
     border-color: #ff00ff;
     color: #ff00ff;
@@ -498,8 +511,9 @@ body::after {
         display: flex;
     }
     
-    /* Reposition info panel for portrait */
+    /* Reposition info panel for portrait - move to top */
     .info-panel {
+        order: -1;
         width: 100%;
         max-width: 100%;
         flex-direction: row;
