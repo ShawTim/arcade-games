@@ -408,19 +408,17 @@ body::after {
 }
 
 .section span.arrow-left {
-    display: block;
-    text-shadow: inherit;
-    font-size: inherit;
-    color: inherit;
+    display: inline-block;
     transform: rotate(-90deg);
+    color: #00ffff;
+    font-size: 14px;
 }
 
 .section span.arrow-right {
-    display: block;
-    text-shadow: inherit;
-    font-size: inherit;
-    color: inherit;
+    display: inline-block;
     transform: rotate(90deg);
+    color: #00ffff;
+    font-size: 14px;
 }
 
 /* Touch control arrows */

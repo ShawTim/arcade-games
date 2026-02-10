@@ -1,6 +1,6 @@
 /**
- * Tetris CV Prototype
- * Modular design for easy CV integration
+ * Arcade Games - Tetris
+ * Built with vanilla JavaScript for GitHub Pages
  */
 
 // ===== Constants =====
