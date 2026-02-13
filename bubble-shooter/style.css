@@ -1,0 +1,593 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&family=VT323&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --neon-pink: #ff0055;
+    --neon-cyan: #00ffff;
+    --neon-green: #00ff00;
+    --neon-yellow: #ffff00;
+    --neon-purple: #ff00ff;
+    --neon-orange: #ff6600;
+    --neon-red: #ff0044;
+    --neon-blue: #0088ff;
+    --bg-dark: #0a0a0f;
+    --bg-darker: #050508;
+    --8bit-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+body {
+    font-family: 'VT323', monospace;
+    background: var(--bg-darker);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #fff;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* CRT Container Effects */
+.crt-container {
+    position: relative;
+    min-height: 100vh;
+    background: var(--bg-dark);
+}
+
+/* Animated Scanlines */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.15) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1000;
+    animation: scanlineMove 0.5s linear infinite;
+}
+
+@keyframes scanlineMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+}
+
+/* Additional scanline overlay with varying intensity */
+.scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    animation: scanlineFlicker 0.1s infinite;
+}
+
+@keyframes scanlineFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.98; }
+}
+
+/* Glow effect */
+.glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 255, 255, 0.05) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 999;
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+/* Vignette */
+.vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 50%,
+        rgba(0, 0, 0, 0.5) 100%
+    );
+    pointer-events: none;
+    z-index: 1001;
+}
+
+/* Screen flicker effect */
+.crt-container::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 16, 16, 0.02);
+    pointer-events: none;
+    z-index: 1002;
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.97; }
+    5% { opacity: 0.95; }
+    10% { opacity: 0.98; }
+    15% { opacity: 0.96; }
+    20% { opacity: 0.99; }
+    50% { opacity: 0.95; }
+    80% { opacity: 0.98; }
+    100% { opacity: 0.97; }
+}
+
+/* Game Wrapper */
+.game-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Header */
+.game-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 8-Bit Retro Title */
+.neon-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #fff;
+    text-shadow:
+        0 0 5px var(--neon-cyan),
+        0 0 10px var(--neon-cyan),
+        0 0 20px var(--neon-cyan),
+        3px 3px 0 rgba(0, 0, 0, 0.8);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    animation: titleFlash 2s ease-in-out infinite;
+    image-rendering: pixelated;
+}
+
+@keyframes titleFlash {
+    0%, 90%, 100% { 
+        text-shadow:
+            0 0 5px var(--neon-cyan),
+            0 0 10px var(--neon-cyan),
+            0 0 20px var(--neon-cyan),
+            3px 3px 0 rgba(0, 0, 0, 0.8);
+    }
+    95% { 
+        text-shadow:
+            0 0 2px var(--neon-cyan),
+            0 0 5px var(--neon-cyan),
+            3px 3px 0 rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* Stats - 8-bit style boxes */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 3px solid;
+    border-color: var(--neon-cyan);
+    box-shadow: 
+        inset 0 0 10px rgba(0, 255, 255, 0.1),
+        2px 2px 0 rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.stat-box::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    pointer-events: none;
+}
+
+.stat-label {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.5rem;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-family: 'VT323', monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.neon-text {
+    color: var(--neon-cyan);
+    text-shadow:
+        0 0 5px var(--neon-cyan),
+        0 0 10px var(--neon-cyan);
+}
+
+/* Game Container */
+.game-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#gameCanvas {
+    border: 4px solid var(--neon-cyan);
+    border-radius: 4px;
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.3),
+        inset 0 0 50px rgba(0, 255, 255, 0.05),
+        4px 4px 0 rgba(0, 0, 0, 0.5);
+    background: radial-gradient(ellipse at center, #0f1520 0%, #050508 100%);
+    max-width: 100%;
+    cursor: crosshair;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 5, 8, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
+    animation: overlayFadeIn 0.3s ease;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 40px;
+    animation: contentBounce 0.5s ease;
+}
+
+@keyframes contentBounce {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.overlay-content .neon-title {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    animation: rainbowFlash 1s linear infinite;
+}
+
+@keyframes rainbowFlash {
+    0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 3px 3px 0 rgba(0,0,0,0.8); }
+    20% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 3px 3px 0 rgba(0,0,0,0.8); }
+    40% { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 3px 3px 0 rgba(0,0,0,0.8); }
+    60% { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 3px 3px 0 rgba(0,0,0,0.8); }
+    80% { text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00, 3px 3px 0 rgba(0,0,0,0.8); }
+    100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 3px 3px 0 rgba(0,0,0,0.8); }
+}
+
+.final-score, .level-score {
+    font-family: 'VT323', monospace;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+/* 8-Bit Buttons */
+.neon-button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    padding: 20px 30px;
+    background: transparent;
+    border: 4px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    border-radius: 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.1s;
+    box-shadow:
+        inset 0 0 10px rgba(0, 255, 255, 0.1),
+        4px 4px 0 rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    image-rendering: pixelated;
+}
+
+.neon-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.3s;
+}
+
+.neon-button:hover {
+    background: rgba(0, 255, 255, 0.15);
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.4),
+        inset 0 0 20px rgba(0, 255, 255, 0.1),
+        4px 4px 0 rgba(0, 0, 0, 0.5);
+    transform: translate(-2px, -2px);
+}
+
+.neon-button:hover::before {
+    left: 100%;
+}
+
+.neon-button:active {
+    transform: translate(2px, 2px);
+    box-shadow:
+        inset 0 0 20px rgba(0, 255, 255, 0.2),
+        2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 3px solid var(--neon-cyan);
+    border-radius: 0;
+    color: var(--neon-cyan);
+    cursor: pointer;
+    transition: all 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.control-btn:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 
+        0 0 15px rgba(0, 255, 255, 0.4),
+        3px 3px 0 rgba(0, 0, 0, 0.5);
+    transform: translate(-2px, -2px);
+}
+
+.control-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.control-btn.muted {
+    opacity: 0.5;
+    border-color: #666;
+    color: #666;
+}
+
+/* Instructions */
+.instructions {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    font-family: 'VT323', monospace;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+/* Color palette shift animation for retro effect */
+@keyframes paletteShift {
+    0% { filter: hue-rotate(0deg); }
+    25% { filter: hue-rotate(5deg); }
+    50% { filter: hue-rotate(0deg); }
+    75% { filter: hue-rotate(-5deg); }
+    100% { filter: hue-rotate(0deg); }
+}
+
+.game-wrapper {
+    animation: paletteShift 10s linear infinite;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .game-wrapper {
+        padding: 10px;
+    }
+
+    .neon-title {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .stats {
+        gap: 8px;
+    }
+
+    .stat-box {
+        padding: 8px 10px;
+        border-width: 2px;
+    }
+
+    .stat-label {
+        font-size: 0.45rem;
+    }
+
+    .stat-value {
+        font-size: 1.4rem;
+    }
+
+    .overlay-content .neon-title {
+        font-size: 0.9rem;
+    }
+
+    .neon-button {
+        padding: 15px 20px;
+        font-size: 0.6rem;
+        border-width: 3px;
+    }
+    
+    #gameCanvas {
+        border-width: 3px;
+    }
+}
+
+@media (max-width: 400px) {
+    .neon-title {
+        font-size: 0.8rem;
+    }
+
+    .stats {
+        gap: 5px;
+    }
+
+    .stat-box {
+        padding: 6px 8px;
+    }
+
+    .stat-label {
+        font-size: 0.4rem;
+    }
+
+    .stat-value {
+        font-size: 1.2rem;
+    }
+    
+    .instructions {
+        font-size: 1rem;
+    }
+}
+
+/* Pixel art border effect */
+.pixel-border {
+    position: relative;
+}
+
+.pixel-border::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: 
+        linear-gradient(to right, var(--neon-cyan) 4px, transparent 4px),
+        linear-gradient(to bottom, var(--neon-cyan) 4px, transparent 4px),
+        linear-gradient(to left, var(--neon-cyan) 4px, transparent 4px),
+        linear-gradient(to top, var(--neon-cyan) 4px, transparent 4px);
+    background-size: 100% 4px, 4px 100%, 100% 4px, 4px 100%;
+    background-position: top, right, bottom, left;
+    background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
+    pointer-events: none;
+    animation: borderPulse 2s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Loading/transition effects */
+.loading-dots::after {
+    content: '';
+    animation: loadingDots 1.5s infinite;
+}
+
+@keyframes loadingDots {
+    0% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+    100% { content: ''; }
+}
+
+/* Star field background effect */
+.star-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}

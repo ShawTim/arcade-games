@@ -327,14 +327,14 @@ class Renderer {
         this.ctx.fillStyle = '#fff';
         this.ctx.font = 'bold 40px Arial';
         this.ctx.textAlign = 'center';
-        this.ctx.fillText('GAME OVER', this.canvas.width / 2, this.canvas.height / 2 - 20);
+        this.ctx.fillText('遊戲結束', this.canvas.width / 2, this.canvas.height / 2 - 20);
         
         this.ctx.font = '20px Arial';
         const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
         if (isMobile) {
-            this.ctx.fillText('TAP TO RESTART', this.canvas.width / 2, this.canvas.height / 2 + 30);
+            this.ctx.fillText('點擊重新開始', this.canvas.width / 2, this.canvas.height / 2 + 30);
         } else {
-            this.ctx.fillText('Press R to Restart', this.canvas.width / 2, this.canvas.height / 2 + 30);
+            this.ctx.fillText('按 R 重新開始', this.canvas.width / 2, this.canvas.height / 2 + 30);
         }
     }
 
@@ -346,7 +346,7 @@ class Renderer {
         this.ctx.fillStyle = '#fff';
         this.ctx.font = 'bold 40px Arial';
         this.ctx.textAlign = 'center';
-        this.ctx.fillText('PAUSED', this.canvas.width / 2, this.canvas.height / 2);
+        this.ctx.fillText('暫停', this.canvas.width / 2, this.canvas.height / 2);
     }
 
     // Draw start screen
@@ -398,10 +398,10 @@ class Renderer {
             this.ctx.shadowColor = '#ff0';
             this.ctx.shadowBlur = 15;
             if (isMobile) {
-                this.ctx.fillText('TAP TO START', this.canvas.width / 2, this.canvas.height / 2 + 60);
+                this.ctx.fillText('點擊開始', this.canvas.width / 2, this.canvas.height / 2 + 60);
             } else {
-                this.ctx.fillText('PRESS S', this.canvas.width / 2, this.canvas.height / 2 + 50);
-                this.ctx.fillText('TO START', this.canvas.width / 2, this.canvas.height / 2 + 75);
+                this.ctx.fillText('按 S 鍵', this.canvas.width / 2, this.canvas.height / 2 + 50);
+                this.ctx.fillText('開始遊戲', this.canvas.width / 2, this.canvas.height / 2 + 75);
             }
             this.ctx.shadowBlur = 0;
         }

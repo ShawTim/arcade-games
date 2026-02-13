@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="8-Bit Retro Bubble Shooter - Classic arcade bubble popping game with authentic 8-bit visuals">
+    <meta name="theme-color" content="#00ffff">
+    <title>泡泡射手 - Arcade Collection</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='10' y='10' width='80' height='80' fill='%2300ffff'/><rect x='20' y='20' width='60' height='60' fill='%23000'/></svg>">
+</head>
+<body>
+    <div class="crt-container">
+        <!-- Retro CRT Effects -->
+        <div class="scanlines"></div>
+        <div class="glow"></div>
+        <div class="vignette"></div>
+        
+        <!-- Star field background -->
+        <div class="star-field" id="starField"></div>
+        
+        <div class="game-wrapper">
+            <div style="text-align: center; margin-bottom: 10px;">
+                <a href="../index.html" style="color: #ff00ff; text-decoration: none; font-family: 'Press Start 2P', cursive; font-size: 0.7rem; letter-spacing: 1px;">← 返回遊戲廳</a>
+            </div>
+            <header class="game-header">
+                <h1 class="neon-title">▼ BUBBLE SHOOTER ▼</h1>
+                <div class="stats">
+                    <div class="stat-box">
+                        <span class="stat-label">分數</span>
+                        <span id="score" class="stat-value neon-text">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">最高</span>
+                        <span id="highScore" class="stat-value neon-text">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">關卡</span>
+                        <span id="level" class="stat-value neon-text">1</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">射擊</span>
+                        <span id="shots" class="stat-value neon-text">0</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="game-container pixel-border">
+                <canvas id="gameCanvas"></canvas>
+                
+                <!-- Game Over Overlay -->
+                <div id="gameOver" class="overlay hidden">
+                    <div class="overlay-content">
+                        <h2 class="neon-title">遊戲結束</h2>
+                        <p class="final-score">最終分數: <span id="finalScore">0</span></p>
+                        <button id="restartBtn" class="neon-button">再玩一次</button>
+                        <p style="margin-top: 15px; font-size: 0.7rem; color: rgba(255,255,255,0.5);">按 [R] 重新開始</p>
+                    </div>
+                </div>
+                
+                <!-- Level Complete Overlay -->
+                <div id="levelComplete" class="overlay hidden">
+                    <div class="overlay-content">
+                        <h2 class="neon-title">過關！</h2>
+                        <p class="level-score">獎勵: <span id="levelBonus">0</span></p>
+                        <button id="nextLevelBtn" class="neon-button">下一關</button>
+                    </div>
+                </div>
+                
+                <!-- Pause Menu Overlay -->
+                <div id="pauseMenu" class="overlay hidden">
+                    <div class="overlay-content">
+                        <h2 class="neon-title">暫停</h2>
+                        <button id="resumeBtn" class="neon-button">繼續</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="pauseBtn" class="control-btn" title="Pause (ESC)">⏸</button>
+                <button id="soundBtn" class="control-btn" title="Toggle Sound">🔊</button>
+            </div>
+            
+            <div class="instructions">
+                <p>► 瞄準並點擊射擊 • 配對3個以上同色泡泡消除 ◄</p>
+                <p style="font-size: 0.9rem; margin-top: 5px;">[空白鍵] 射擊 • [ESC] 暫停</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Generate star field
+        const starField = document.getElementById('starField');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.opacity = Math.random() * 0.5 + 0.2;
+            starField.appendChild(star);
+        }
+    </script>
+    <script src="game.js"></script>
+</body>
+</html>

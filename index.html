@@ -1,67 +1,339 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <title>Arcade Games</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCADE COLLECTION — 復古遊戲廳</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-cyan: #00ffff;
+            --neon-yellow: #ffff00;
+            --neon-green: #00ff00;
+            --dark: #0a0a0f;
+        }
+        
+        body {
+            background: var(--dark);
+            min-height: 100vh;
+            font-family: 'VT323', monospace;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* CRT 掃描線 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        /* Marquee 頂部 */
+        .marquee {
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+            border-bottom: 4px solid var(--neon-pink);
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+        
+        .marquee h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2rem;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 20px var(--neon-yellow);
+            letter-spacing: 8px;
+        }
+        
+        .marquee p {
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            margin-top: 10px;
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        
+        /* 投幣區 */
+        .coin-slot-area {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 30px;
+            background: linear-gradient(90deg, transparent, rgba(255,0,255,0.1), transparent);
+        }
+        
+        .coin-slot {
+            width: 80px;
+            height: 100px;
+            background: #222;
+            border: 3px solid #444;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .coin-slot::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 8px;
+            background: #111;
+            border-radius: 4px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+        }
+        
+        .coin-slot::after {
+            content: '25¢';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            color: var(--neon-yellow);
+        }
+        
+        /* 遊戲區 */
+        .games-showcase {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+        }
+        
+        /* 街機櫃 */
+        .arcade-cabinet {
+            width: 280px;
+            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            box-shadow: 
+                0 0 30px rgba(0,255,255,0.3),
+                0 20px 40px rgba(0,0,0,0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .arcade-cabinet:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 0 40px rgba(0,255,255,0.5),
+                0 25px 50px rgba(0,0,0,0.5);
+        }
+        
+        /* 櫃頂 Marquee */
+        .cabinet-marquee {
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            padding: 15px;
+            border-radius: 17px 17px 0 0;
+            text-align: center;
+        }
+        
+        .cabinet-marquee h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            color: #000;
+            text-shadow: none;
+        }
+        
+        /* 屏幕 */
+        .screen {
+            background: #000;
+            margin: 20px;
+            aspect-ratio: 4/3;
+            border: 4px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .screen-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #0a0a0f, #151520);
+            color: var(--neon-cyan);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+        
+        /* 控制板 */
+        .control-panel {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .joystick-area {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .joystick {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #444, #222);
+            border-radius: 50%;
+            border: 2px solid #555;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .arcade-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+        }
+        
+        .arcade-btn.red { background: #ff0044; box-shadow: 0 0 10px #ff0044; }
+        .arcade-btn.blue { background: #00ccff; box-shadow: 0 0 10px #00ccff; }
+        
+        /* 開始按鈕 */
+        .start-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            background: transparent;
+            border: 3px solid var(--neon-yellow);
+            color: var(--neon-yellow);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .start-btn:hover {
+            background: var(--neon-yellow);
+            color: #000;
+            box-shadow: 0 0 30px var(--neon-yellow);
+        }
+        
+        /* 閃爍動畫 */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #333;
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+        }
+        
+        footer a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .marquee h1 { font-size: 1.2rem; letter-spacing: 4px; }
+            .games-showcase { gap: 30px; padding: 30px 10px; }
+            .arcade-cabinet { width: 260px; }
+            .coin-slot-area { gap: 20px; padding: 20px; }
+            .coin-slot { width: 60px; height: 80px; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Arcade Cabinet Frame -->
-    <div class="arcade-cabinet">
-        <div class="neon-border"></div>
+    <!-- Marquee 頂部 -->
+    <div class="marquee">
+        <h1>ARCADE COLLECTION</h1>
+        <p>投幣即可遊玩</p>
+    </div>
+    
+    <!-- 投幣區 -->
+    <div class="coin-slot-area">
+        <div class="coin-slot"></div>
+        <div class="coin-slot"></div>
+        <div class="coin-slot"></div>
+    </div>
+    
+    <!-- 遊戲展示 -->
+    <div class="games-showcase">
+        <!-- Tetris 櫃 -->
+        <div class="arcade-cabinet">
+            <div class="cabinet-marquee">
+                <h3>俄羅斯方塊</h3>
+            </div>
+            <div class="screen">
+                <div class="screen-placeholder">TETRIS</div>
+            </div>
+            <div class="control-panel">
+                <div class="joystick-area"><div class="joystick"></div></div>
+                <div class="buttons">
+                    <div class="arcade-btn red"></div>
+                    <div class="arcade-btn blue"></div>
+                </div>
+            </div>
+            <a href="tetris/index.html" class="start-btn blink">投幣開始</a>
+        </div>
         
-        <div class="container">
-            <!-- Game Area -->
-            <div class="game-area">
-                <!-- Screen Bezel -->
-                <div class="screen-bezel">
-                    <canvas id="tetris" width="300" height="600" tabindex="0"></canvas>
-                    <!-- CRT Scanline Overlay -->
-                    <div class="crt-overlay"></div>
-                </div>
-
-                <!-- Touch Controls (mobile only) -->
-                <div class="touch-controls">
-                    <button class="touch-btn" id="btn-left"><span class="arrow-left">↑</span></button>
-                    <button class="touch-btn" id="btn-down">↓</button>
-                    <button class="touch-btn" id="btn-right"><span class="arrow-right">↑</span></button>
-                    <button class="touch-btn action" id="btn-rotate">ROTATE</button>
+        <!-- Bubble Shooter 櫃 -->
+        <div class="arcade-cabinet">
+            <div class="cabinet-marquee" style="background: linear-gradient(90deg, #00ff00, #00cc00);">
+                <h3>泡泡射手</h3>
+            </div>
+            <div class="screen">
+                <div class="screen-placeholder" style="background: linear-gradient(145deg, #001100, #002200); color: #00ff00;">BUBBLES</div>
+            </div>
+            <div class="control-panel">
+                <div class="joystick-area"><div class="joystick"></div></div>
+                <div class="buttons">
+                    <div class="arcade-btn red"></div>
+                    <div class="arcade-btn blue"></div>
                 </div>
             </div>
-
-            <!-- Side Info Panel -->
-            <div class="info-panel">
-                <!-- Game Status -->
-                <div class="section">
-                    <h3>Game Status</h3>
-                    <p>Score: <span id="score">0</span></p>
-                    <p>Level: <span id="level">1</span></p>
-                    <p>Lines: <span id="lines">0</span></p>
-                </div>
-
-                <!-- Next Piece Preview -->
-                <div class="section">
-                    <h3>Next Piece</h3>
-                    <canvas id="nextPiece" width="120" height="120"></canvas>
-                </div>
-
-                <!-- Controls Instructions -->
-                <div class="section">
-                    <h3>Controls</h3>
-		    <p><kbd><span class="arrow-left">↑</span></kbd> <kbd><span class="arrow-right">↑</span></kbd> : Move</p>
-                    <p><kbd>↓</kbd> : Soft Drop</p>
-                    <p><kbd>↑</kbd> / <kbd>Space</kbd> : Rotate</p>
-                    <p><kbd>S</kbd> : Start Game</p>
-                    <p><kbd>P</kbd> : Pause</p>
-                    <p><kbd>R</kbd> : Restart</p>
+            <a href="bubble-shooter/index.html" class="start-btn blink" style="border-color: #00ff00; color: #00ff00;">投幣開始</a>
+        </div>
+        
+        <!-- Space Invaders 櫃 -->
+        <div class="arcade-cabinet">
+            <div class="cabinet-marquee" style="background: linear-gradient(90deg, #ff6600, #ff0044);">
+                <h3>太空侵略者</h3>
+            </div>
+            <div class="screen">
+                <div class="screen-placeholder" style="background: linear-gradient(145deg, #0a0000, #1a0a00); color: #ff6600;">INVADERS</div>
+            </div>
+            <div class="control-panel">
+                <div class="joystick-area"><div class="joystick"></div></div>
+                <div class="buttons">
+                    <div class="arcade-btn red"></div>
+                    <div class="arcade-btn blue"></div>
                 </div>
             </div>
+            <a href="space-invaders/index.html" class="start-btn blink" style="border-color: #ff6600; color: #ff6600;">投幣開始</a>
         </div>
     </div>
-
-    <script src="game.js?v=9"></script>
+    
+    <footer>
+        <p>復古遊戲廳 — 用 ❤️ 打造</p>
+    </footer>
 </body>
 </html>

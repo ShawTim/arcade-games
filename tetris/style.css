@@ -47,21 +47,13 @@ body::before {
     z-index: -2;
 }
 
-/* Stegosaurus pixel background */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('stegosaurus.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    opacity: 0.75;
-    z-index: -1;
-    pointer-events: none;
+/* CSS Variables */
+:root {
+    --neon-pink: #ff00ff;
+    --neon-cyan: #00ffff;
+    --neon-yellow: #ffff00;
+    --neon-green: #00ff00;
+    --dark: #0a0a0f;
 }
 
 /* ===== Arcade Cabinet Frame ===== */
