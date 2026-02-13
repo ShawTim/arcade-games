@@ -1,169 +1,74 @@
-# QA Report — Arcade Games Collection
+# QA Report — Arcade Games Portal
 
-**日期**: 2026-02-14  
-**測試者**: AI Agent  
-**環境**: localhost:8080, Python HTTP server, Chrome headless
-
----
-
-## 1. 入口頁面 (index.html)
-
-### ✅ 通過
-- 三款遊戲正確顯示（俄羅斯方塊、泡泡射手、太空侵略者）
-- 街機櫃視覺效果正常，CRT 掃描線有效
-- 所有連結指向正確路徑
-- 投幣區裝飾元素顯示正常
-- 正體中文文字顯示正確
-
-### 修復項目
-- ~~「Coming Soon」佔位櫃~~ → 替換為太空侵略者
-- ~~所有文字為英文~~ → 翻譯為正體中文
-- ~~Bubble Shooter 使用 inline styles~~ → 改用 CSS class
-- 新增響應式媒體查詢（行動裝置支援）
-
-### 待辦
-- 預覽圖片尚未提供（目前使用文字佔位符）
+**Date**: 2026-02-14  
+**Tested by**: AI Agent  
+**Server**: `python3 -m http.server 8080` from project root  
 
 ---
 
-## 2. 俄羅斯方塊 (tetris/)
+## Summary
 
-### ✅ 通過
-- 開始畫面正常顯示（閃爍 "按 S 鍵 開始遊戲"）
-- CRT 效果（掃描線、螢幕暗角、霓虹光暈）
-- 資訊面板顯示分數、等級、行數
-- 下一個方塊預覽正常
-- 返回大廳連結存在
-- 行動裝置觸控按鈕（≤768px 顯示）
-
-### 修復項目
-- ~~`lang="en"`~~ → 改為 `zh-Hant`
-- ~~所有 UI 文字為英文~~ → 翻譯為正體中文
-- ~~頁面 title "Arcade Games"~~ → 改為 "俄羅斯方塊 - Arcade Collection"
-- ~~"BACK TO ARCADE"~~ → "← 返回街機大廳"
-- ~~"Game Status / Score / Level / Lines"~~ → 遊戲狀態 / 分數 / 等級 / 行數
-- ~~"GAME OVER / Press R to Restart"~~ → 遊戲結束 / 按 R 重新開始
-- ~~"PAUSED"~~ → 暫停
-- 移除多餘檔案：`screenshot.js`, `run.sh`
-
-### 遊戲邏輯分析
-- SRS 旋轉系統 + 牆踢（wall kick）正確實作
-- 計分系統：1行=100, 2行=300, 3行=500, 4行=800（乘以等級）
-- 每 10 行升一級，速度遞增
-- 行消除有閃爍動畫 + 螢幕震動效果
-- 碰撞檢測邏輯正確
-
-### 已知限制
-- 無硬降（Hard Drop）功能
-- 無音效
-- 無最高分持久化（localStorage）
-- `stegosaurus.jpg` 作為背景圖（裝飾用途，正常）
+| Game | Status | Desktop | Mobile Touch |
+|------|--------|---------|-------------|
+| Portal | ✅ Working | ✅ | ✅ Responsive |
+| Tetris | ✅ Working | ✅ Keyboard | ✅ Touch buttons |
+| Bubble Shooter | ✅ Working | ✅ Mouse aim + click | ✅ Touch aim + tap |
+| Space Invaders | ✅ Working | ✅ Keyboard | ✅ Touch buttons |
 
 ---
 
-## 3. 泡泡射手 (bubble-shooter/)
+## Issues Found & Fixed
 
-### ✅ 通過
-- 遊戲載入並正確顯示泡泡網格
-- 瞄準線 + 射擊機制運作
-- 泡泡碰撞和配對邏輯
-- 8-bit 音效系統（Web Audio API）
-- 粒子效果和浮動文字
-- 關卡系統（隨等級增加難度）
-- 暫停 / 音效開關 / 重新開始功能
+### Portal (index.html)
+- **[FIXED]** All text was English → Translated to Traditional Chinese (正體中文)
+- **[FIXED]** "Coming Soon" placeholder cabinet → Replaced with Space Invaders
+- **[FIXED]** Footer text "Vibe Coding Collection" → "復古遊戲廳"
+- **[FIXED]** Added hover effect on arcade cabinets
+- **[FIXED]** Added responsive mobile breakpoint
 
-### 修復項目
-- ~~`lang="en"`~~ → 改為 `zh-Hant`
-- ~~所有 UI 文字為英文~~ → 翻譯為正體中文
-- ~~無返回大廳連結~~ → 新增 "← 返回街機大廳"
-- ~~"GAME OVER / PLAY AGAIN"~~ → 遊戲結束 / 再玩一次
-- ~~"LEVEL CLEAR / NEXT LEVEL"~~ → 過關！ / 下一關
-- ~~"PAUSED / RESUME"~~ → 暫停 / 繼續
-- ~~"SCORE / HIGH / LEVEL / SHOTS"~~ → 分數 / 最高 / 關卡 / 射擊
+### Tetris
+- **[FIXED]** `lang="en"` → `lang="zh-Hant"`
+- **[FIXED]** All UI text translated to Chinese (分數, 等級, 行數, 操作方式, etc.)
+- **[FIXED]** Removed irrelevant `stegosaurus.jpg` background
+- **[FIXED]** Back link: "BACK TO ARCADE" → "返回遊戲廳"
+- **[FIXED]** Touch button: "ROTATE" → "旋轉"
+- **[FIXED]** Removed unused files: `screenshot.js`, `run.sh`, `stegosaurus.jpg`
 
-### 遊戲邏輯分析
-- 像素化泡泡精靈（sprite canvas 預生成）
-- 六邊形網格鄰居查詢正確
-- BFS 配色搜尋 + 孤立泡泡掉落
-- 天花板下降機制（每 N 次射擊）
-- 高分使用 localStorage 持久化
-- 觸控支援（瞄準 + 點擊射擊）
+### Bubble Shooter
+- **[FIXED]** Back link text inconsistency: "返回街機大廳" → "返回遊戲廳" (consistent with other games)
+- **[OK]** Game already had Chinese text, CRT effects, and back link from prior work
 
-### 待觀察
-- 在極端情況下，泡泡 snap-to-grid 可能不精確
-- 性能：大量粒子時可能在低端設備上卡頓
+### Space Invaders (NEW)
+- **[CREATED]** New game following SPEC.md guidelines
+- Features: 5 rows of enemies (3 types), shields, UFO bonus, wave progression
+- Canvas-based rendering with pixel art sprites
+- 8-bit sound effects
+- Touch controls for mobile
+- All text in Traditional Chinese
 
 ---
 
-## 4. 太空侵略者 (space-invaders/) — 新建
+## Remaining Notes
 
-### ✅ 通過
-- 開始畫面 + 開始按鈕正常
-- 像素藝術玩家飛船、三種外星人類型
-- UFO 隨機出現
-- 防護盾（可被破壞）
-- 8-bit 音效
-- 分數系統（頂排30分, 中排20分, 底排10分, UFO 50-300分）
-- 波次系統（越來越快）
-- 遊戲結束 + 重新開始
-- 暫停功能
-- 行動裝置觸控按鈕
+### Bubble Shooter
+- Game is fully functional with aiming, shooting, match-3 mechanics, levels, pause
+- Has its own CRT effect approach (HTML overlays) vs Tetris (CSS-only) — minor inconsistency but both work well
+- Color palette shift animation (`hue-rotate`) is unique to this game
 
-### 功能清單
-- ✅ 玩家移動 + 射擊
-- ✅ 外星人波次移動（左右+下降）
-- ✅ 敵方射擊
-- ✅ 4 個防護盾（可被雙方子彈破壞）
-- ✅ UFO 飛越（隨機分數）
-- ✅ 生命系統（3 條命 + 無敵時間）
-- ✅ 外星人加速（數量減少時）
-- ✅ 粒子爆炸效果
-- ✅ 螢幕震動
-- ✅ 浮動分數文字
+### Tetris
+- The `★ TETRIS ★` cabinet top decoration text remains in English (fine — it's a brand name)
+- Canvas start screen shows "ARCADE GAMES" in English (brand/logo text, acceptable)
+
+### Cross-Game Consistency
+- All games use `Press Start 2P` + `VT323` fonts ✅
+- All games use same color palette (cyan/pink/yellow/green) ✅  
+- All games have CRT scanline effects ✅
+- All games have "← 返回遊戲廳" back links ✅
+- All games responsive with mobile touch controls ✅
 
 ---
 
-## 5. 跨遊戲一致性
-
-| 項目 | Tetris | Bubble Shooter | Space Invaders |
-|------|--------|----------------|----------------|
-| lang="zh-Hant" | ✅ | ✅ | ✅ |
-| 正體中文 UI | ✅ | ✅ | ✅ |
-| 返回大廳連結 | ✅ | ✅ | ✅ |
-| CRT 掃描線 | ✅ | ✅ | ✅ |
-| 行動裝置觸控 | ✅ | ✅ | ✅ |
-| 暫停功能 | ✅ (P鍵) | ✅ (ESC) | ✅ (ESC/P) |
-| 像素字體 | ✅ | ✅ | ✅ |
-| 霓虹色彩 | ✅ cyan | ✅ cyan | ✅ orange |
-
----
-
-## 6. 專案清理
-
-### 已移除
-- `tetris/screenshot.js` — Playwright 截圖腳本（開發工具，不屬於遊戲）
-- `tetris/run.sh` — 啟動腳本（功能已在 README 說明）
-
-### 保留
-- `stegosaurus.jpg` (root + tetris/) — 裝飾用背景圖
-- `.git/` — 版本控制
-
----
-
-## 7. 新增文件
-
-- `SPEC.md` — 專案規格與開發指南
-- `QA_REPORT.md` — 本文件
-- `space-invaders/` — 完整的太空侵略者遊戲
-
----
-
-## 總結
-
-所有三款遊戲均可正常運作。主要改進包括：
-1. 全面翻譯為正體中文
-2. 統一 CRT 復古美學
-3. 新增太空侵略者遊戲
-4. 建立專案規格文件
-5. 清理多餘檔案
-6. 改善入口頁面結構（移除 inline styles，新增響應式設計）
+## Files Cleaned Up
+- `stegosaurus.jpg` (root and tetris/) — irrelevant to arcade theme
+- `tetris/screenshot.js` — unused utility
+- `tetris/run.sh` — unnecessary shell script
