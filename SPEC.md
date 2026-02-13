@@ -4,7 +4,7 @@
 
 A retro arcade games portal with a nostalgic CRT/16-bit aesthetic. Pure vanilla HTML/CSS/JS — no frameworks, no build tools. Deployable as static files anywhere (GitHub Pages, any HTTP server).
 
-**Language**: All user-facing text in **正體中文 (Traditional Chinese)**. Code comments in English.
+**Language**: All user-facing text and code comments in **English**.
 
 ---
 
@@ -102,7 +102,7 @@ arcade-games/
    - Viewport meta with `user-scalable=no`
    - Google Fonts link (`Press Start 2P`, `VT323`)
    - CRT scanline overlay
-   - "← 返回遊戲廳" back link to `../index.html`
+   - "← BACK TO ARCADE" back link to `../index.html`
    - Canvas element for the game
    - Touch controls for mobile
 4. **CSS** — Include CRT effects, use shared color variables, responsive breakpoints
@@ -135,7 +135,7 @@ arcade-games/
             <div class="arcade-btn blue"></div>
         </div>
     </div>
-    <a href="game-name/index.html" class="start-btn blink">投幣開始</a>
+    <a href="game-name/index.html" class="start-btn blink">PRESS START</a>
 </div>
 ```
 

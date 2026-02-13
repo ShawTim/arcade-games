@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARCADE COLLECTION — 復古遊戲廳</title>
+    <title>ARCADE COLLECTION — RETRO ARCADE</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
         
-        /* CRT 掃描線 */
+        /* CRT scanlines */
         body::before {
             content: '';
             position: fixed;
@@ -36,7 +36,7 @@
             z-index: 1000;
         }
         
-        /* Marquee 頂部 */
+        /* Marquee top */
         .marquee {
             background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
             border-bottom: 4px solid var(--neon-pink);
@@ -60,7 +60,7 @@
             text-shadow: 0 0 10px var(--neon-cyan);
         }
         
-        /* 投幣區 */
+        /* Coin slot area */
         .coin-slot-area {
             display: flex;
             justify-content: center;
@@ -103,7 +103,7 @@
             color: var(--neon-yellow);
         }
         
-        /* 遊戲區 */
+        /* Game area */
         .games-showcase {
             display: flex;
             justify-content: center;
@@ -112,7 +112,7 @@
             flex-wrap: wrap;
         }
         
-        /* 街機櫃 */
+        /* Arcade cabinet */
         .arcade-cabinet {
             width: 280px;
             background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
@@ -131,7 +131,7 @@
                 0 25px 50px rgba(0,0,0,0.5);
         }
         
-        /* 櫃頂 Marquee */
+        /* Cabinet top marquee */
         .cabinet-marquee {
             background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
             padding: 15px;
@@ -146,7 +146,7 @@
             text-shadow: none;
         }
         
-        /* 屏幕 */
+        /* Screen */
         .screen {
             background: #000;
             margin: 20px;
@@ -170,7 +170,7 @@
             text-shadow: 0 0 20px var(--neon-cyan);
         }
         
-        /* 控制板 */
+        /* Control panel */
         .control-panel {
             padding: 20px;
             text-align: center;
@@ -207,7 +207,7 @@
         .arcade-btn.red { background: #ff0044; box-shadow: 0 0 10px #ff0044; }
         .arcade-btn.blue { background: #00ccff; box-shadow: 0 0 10px #00ccff; }
         
-        /* 開始按鈕 */
+        /* Start button */
         .start-btn {
             display: block;
             margin: 20px auto;
@@ -228,7 +228,7 @@
             box-shadow: 0 0 30px var(--neon-yellow);
         }
         
-        /* 閃爍動畫 */
+        /* Blink animation */
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
@@ -262,25 +262,25 @@
     </style>
 </head>
 <body>
-    <!-- Marquee 頂部 -->
+    <!-- Marquee top -->
     <div class="marquee">
         <h1>ARCADE COLLECTION</h1>
-        <p>投幣即可遊玩</p>
+        <p>INSERT COIN TO PLAY</p>
     </div>
     
-    <!-- 投幣區 -->
+    <!-- Coin slot area -->
     <div class="coin-slot-area">
         <div class="coin-slot"></div>
         <div class="coin-slot"></div>
         <div class="coin-slot"></div>
     </div>
     
-    <!-- 遊戲展示 -->
+    <!-- Game showcase -->
     <div class="games-showcase">
-        <!-- Tetris 櫃 -->
+        <!-- Tetris cabinet -->
         <div class="arcade-cabinet">
             <div class="cabinet-marquee">
-                <h3>俄羅斯方塊</h3>
+                <h3>TETRIS</h3>
             </div>
             <div class="screen">
                 <div class="screen-placeholder">TETRIS</div>
@@ -292,13 +292,13 @@
                     <div class="arcade-btn blue"></div>
                 </div>
             </div>
-            <a href="tetris/index.html" class="start-btn blink">投幣開始</a>
+            <a href="tetris/index.html" class="start-btn blink">PRESS START</a>
         </div>
         
-        <!-- Bubble Shooter 櫃 -->
+        <!-- Bubble Shooter cabinet -->
         <div class="arcade-cabinet">
             <div class="cabinet-marquee" style="background: linear-gradient(90deg, #00ff00, #00cc00);">
-                <h3>泡泡射手</h3>
+                <h3>BUBBLE SHOOTER</h3>
             </div>
             <div class="screen">
                 <div class="screen-placeholder" style="background: linear-gradient(145deg, #001100, #002200); color: #00ff00;">BUBBLES</div>
@@ -310,13 +310,13 @@
                     <div class="arcade-btn blue"></div>
                 </div>
             </div>
-            <a href="bubble-shooter/index.html" class="start-btn blink" style="border-color: #00ff00; color: #00ff00;">投幣開始</a>
+            <a href="bubble-shooter/index.html" class="start-btn blink" style="border-color: #00ff00; color: #00ff00;">PRESS START</a>
         </div>
         
-        <!-- Space Invaders 櫃 -->
+        <!-- Space Invaders cabinet -->
         <div class="arcade-cabinet">
             <div class="cabinet-marquee" style="background: linear-gradient(90deg, #ff6600, #ff0044);">
-                <h3>太空侵略者</h3>
+                <h3>SPACE INVADERS</h3>
             </div>
             <div class="screen">
                 <div class="screen-placeholder" style="background: linear-gradient(145deg, #0a0000, #1a0a00); color: #ff6600;">INVADERS</div>
@@ -328,12 +328,12 @@
                     <div class="arcade-btn blue"></div>
                 </div>
             </div>
-            <a href="space-invaders/index.html" class="start-btn blink" style="border-color: #ff6600; color: #ff6600;">投幣開始</a>
+            <a href="space-invaders/index.html" class="start-btn blink" style="border-color: #ff6600; color: #ff6600;">PRESS START</a>
         </div>
     </div>
     
     <footer>
-        <p>復古遊戲廳 — 用 ❤️ 打造</p>
+        <p>RETRO ARCADE — MADE WITH ❤️</p>
     </footer>
 </body>
 </html>

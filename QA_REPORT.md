@@ -20,22 +20,22 @@
 ## Issues Found & Fixed
 
 ### Portal (index.html)
-- **[FIXED]** All text was English → Translated to Traditional Chinese (正體中文)
+- **[FIXED]** All text was English → Translated to Traditional Chinese (Traditional Chinese)
 - **[FIXED]** "Coming Soon" placeholder cabinet → Replaced with Space Invaders
-- **[FIXED]** Footer text "Vibe Coding Collection" → "復古遊戲廳"
+- **[FIXED]** Footer text "Vibe Coding Collection" → "RETRO ARCADE"
 - **[FIXED]** Added hover effect on arcade cabinets
 - **[FIXED]** Added responsive mobile breakpoint
 
 ### Tetris
 - **[FIXED]** `lang="en"` → `lang="zh-Hant"`
-- **[FIXED]** All UI text translated to Chinese (分數, 等級, 行數, 操作方式, etc.)
+- **[FIXED]** All UI text translated to Chinese (SCORE, LEVEL, LINES, CONTROLS, etc.)
 - **[FIXED]** Removed irrelevant `stegosaurus.jpg` background
-- **[FIXED]** Back link: "BACK TO ARCADE" → "返回遊戲廳"
-- **[FIXED]** Touch button: "ROTATE" → "旋轉"
+- **[FIXED]** Back link: "BACK TO ARCADE" → "BACK TO ARCADE"
+- **[FIXED]** Touch button: "ROTATE" → "ROTATE"
 - **[FIXED]** Removed unused files: `screenshot.js`, `run.sh`, `stegosaurus.jpg`
 
 ### Bubble Shooter
-- **[FIXED]** Back link text inconsistency: "返回街機大廳" → "返回遊戲廳" (consistent with other games)
+- **[FIXED]** Back link text inconsistency: "BACK TO ARCADE" → "BACK TO ARCADE" (consistent with other games)
 - **[OK]** Game already had Chinese text, CRT effects, and back link from prior work
 
 ### Space Invaders (NEW)
@@ -63,7 +63,7 @@
 - All games use `Press Start 2P` + `VT323` fonts ✅
 - All games use same color palette (cyan/pink/yellow/green) ✅  
 - All games have CRT scanline effects ✅
-- All games have "← 返回遊戲廳" back links ✅
+- All games have "← BACK TO ARCADE" back links ✅
 - All games responsive with mobile touch controls ✅
 
 ---

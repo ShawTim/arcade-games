@@ -311,13 +311,13 @@ function draw() {
         ctx.fillStyle = 'rgba(0,0,0,0.7)'; ctx.fillRect(0,0,W,H);
         ctx.font = 'bold 24px "Press Start 2P",monospace'; ctx.textAlign = 'center';
         ctx.fillStyle = '#ff0044'; ctx.shadowColor = '#ff0044'; ctx.shadowBlur = 15;
-        ctx.fillText('遊戲結束', W/2, H/2-30); ctx.shadowBlur = 0;
+        ctx.fillText('GAME OVER', W/2, H/2-30); ctx.shadowBlur = 0;
         ctx.font = '16px "Press Start 2P",monospace'; ctx.fillStyle = '#fff';
-        ctx.fillText('最終分數: '+g.score, W/2, H/2+10);
+        ctx.fillText('FINAL SCORE: '+g.score, W/2, H/2+10);
         if (Math.floor(Date.now()/500)%2===0) {
             ctx.fillStyle='#ffff00'; ctx.font='12px "Press Start 2P",monospace';
             const m = window.innerWidth<=768||'ontouchstart' in window;
-            ctx.fillText(m?'點擊重新開始':'按 S 重新開始', W/2, H/2+50);
+            ctx.fillText(m?'TAP TO RESTART':'PRESS S TO RESTART', W/2, H/2+50);
         }
     }
 
@@ -325,7 +325,7 @@ function draw() {
     if (g.state === 'paused') {
         ctx.fillStyle='rgba(0,0,0,0.5)'; ctx.fillRect(0,0,W,H);
         ctx.font='bold 24px "Press Start 2P",monospace'; ctx.textAlign='center';
-        ctx.fillStyle='#fff'; ctx.fillText('暫停', W/2, H/2);
+        ctx.fillStyle='#fff'; ctx.fillText('PAUSE', W/2, H/2);
     }
 
     ctx.restore();
@@ -338,7 +338,7 @@ function drawStart() {
 
     ctx.fillStyle='#ff6600'; ctx.font='bold 22px "Press Start 2P",monospace'; ctx.textAlign='center';
     ctx.shadowColor='#ff6600'; ctx.shadowBlur=15;
-    ctx.fillText('太空侵略者', W/2, H/2-80); ctx.shadowBlur=0;
+    ctx.fillText('SPACE INVADERS', W/2, H/2-80); ctx.shadowBlur=0;
 
     ctx.fillStyle='#00ffff'; ctx.font='14px "Press Start 2P",monospace';
     ctx.fillText('SPACE INVADERS', W/2, H/2-50);
@@ -351,12 +351,12 @@ function drawStart() {
         ctx.fillStyle='#ffff00'; ctx.font='bold 14px "Press Start 2P",monospace';
         ctx.shadowColor='#ffff00'; ctx.shadowBlur=10;
         const m = window.innerWidth<=768||'ontouchstart' in window;
-        ctx.fillText(m?'點擊開始':'按 S 開始', W/2, H/2+60); ctx.shadowBlur=0;
+        ctx.fillText(m?'TAP TO START':'PRESS S TO START', W/2, H/2+60); ctx.shadowBlur=0;
     }
 
     ctx.font='10px "Press Start 2P",monospace'; ctx.fillStyle='#888';
-    ctx.fillText('= 30分   = 20分   = 10分', W/2, H/2+100);
-    if (g.hi > 0) { ctx.fillStyle='#ff00ff'; ctx.fillText('最高分: '+g.hi, W/2, H/2+130); }
+    ctx.fillText('= 30pts   = 20pts   = 10pts', W/2, H/2+100);
+    if (g.hi > 0) { ctx.fillStyle='#ff00ff'; ctx.fillText('HIGH SCORE: '+g.hi, W/2, H/2+130); }
     ctx.fillStyle='#444'; ctx.font='8px "Press Start 2P",monospace'; ctx.fillText('VER 1.0', W/2, H-30);
 }
 
