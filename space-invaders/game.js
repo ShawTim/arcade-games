@@ -39,6 +39,8 @@ function snd(type) {
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const nextCanvas = document.getElementById('nextWave');
+const nextCtx = nextCanvas.getContext('2d');
 
 function setupCanvas() {
     const dpr = window.devicePixelRatio || 1;
@@ -49,6 +51,7 @@ function setupCanvas() {
     canvas.style.height = Math.floor(H * sc) + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.imageSmoothingEnabled = false;
+    nextCtx.imageSmoothingEnabled = false;
 }
 
 // State
@@ -62,11 +65,12 @@ const g = {
     keys: {},
 };
 
-function sprite(sp, x, y, color, ps) {
-    ps = ps || 2; ctx.fillStyle = color;
+function sprite(sp, x, y, color, ps, context) {
+    context = context || ctx;
+    ps = ps || 2; context.fillStyle = color;
     for (let r = 0; r < sp.length; r++)
         for (let c = 0; c < sp[r].length; c++)
-            if (sp[r][c]) ctx.fillRect(x + c * ps, y + r * ps, ps, ps);
+            if (sp[r][c]) context.fillRect(x + c * ps, y + r * ps, ps, ps);
 }
 
 function initPlayer() { g.px = W/2 - PW/2; g.py = H - 40; g.palive = true; g.respawn = 0; }
@@ -105,13 +109,13 @@ function initShields() {
 function startGame() {
     g.state = 'playing'; g.score = 0; g.wave = 1; g.lives = 3;
     g.bullets = []; g.ebullets = []; g.particles = []; g.ufo = null; g.ufoTimer = 0; g.eshootT = 0;
-    initPlayer(); initShields(); initEnemies(); updateUI();
+    initPlayer(); initShields(); initEnemies(); updateUI(); drawNextWave();
 }
 
 function nextWave() {
     g.wave++; g.bullets = []; g.ebullets = []; g.particles = [];
     g.ufo = null; g.ufoTimer = 0; g.eshootT = 0;
-    initEnemies(); updateUI();
+    initEnemies(); updateUI(); drawNextWave();
 }
 
 function explode(x, y, color) {
@@ -360,11 +364,62 @@ function drawStart() {
     ctx.fillStyle='#444'; ctx.font='8px "Press Start 2P",monospace'; ctx.fillText('VER 1.0', W/2, H-30);
 }
 
+// Draw next wave preview
+function drawNextWave() {
+    nextCtx.fillStyle = '#000';
+    nextCtx.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
+    
+    if (g.state === 'start') {
+        // Show "???" for start screen
+        nextCtx.font = 'bold 24px "Press Start 2P",monospace';
+        nextCtx.fillStyle = '#ff6600';
+        nextCtx.textAlign = 'center';
+        nextCtx.textBaseline = 'middle';
+        nextCtx.fillText('?', nextCanvas.width/2, nextCanvas.height/2);
+        return;
+    }
+    
+    // Calculate next wave formation
+    const nextWave = g.wave + 1;
+    const scale = 1.2;
+    const xOffset = 15;
+    const yOffset = 20;
+    
+    // Draw mini formation preview
+    nextCtx.font = 'bold 10px "Press Start 2P",monospace';
+    nextCtx.fillStyle = '#00ffff';
+    nextCtx.textAlign = 'center';
+    nextCtx.fillText('WAVE ' + nextWave, nextCanvas.width/2, 15);
+    
+    // Draw mini aliens (3 per row to fit)
+    for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+            const type = r === 0 ? 1 : r < 2 ? 2 : 3;
+            const color = type === 1 ? C.e1 : type === 2 ? C.e2 : C.e3;
+            let sp;
+            if (type === 1) sp = SP.e1a;
+            else if (type === 2) sp = SP.e2a;
+            else sp = SP.e3a;
+            
+            const x = xOffset + c * 28;
+            const y = yOffset + r * 24;
+            sprite(sp, x, y, color, scale, nextCtx);
+        }
+    }
+    
+    // Draw stats
+    nextCtx.font = '8px "Press Start 2P",monospace';
+    nextCtx.fillStyle = '#ffff00';
+    nextCtx.textAlign = 'center';
+    nextCtx.fillText('ENEMIES: ' + (ECOLS * EROWS), nextCanvas.width/2, 105);
+}
+
 function updateUI() {
     document.getElementById('score').textContent = g.score;
     document.getElementById('highScore').textContent = g.hi;
     document.getElementById('wave').textContent = g.wave;
     document.getElementById('lives').textContent = g.lives;
+    drawNextWave();
 }
 
 // Input
@@ -377,7 +432,7 @@ document.addEventListener('keydown', e => {
 });
 document.addEventListener('keyup', e => { g.keys[e.key] = false; });
 
-// Touch
+// Touch controls - updated button IDs
 (function setupTouch() {
     const bL = document.getElementById('btn-left');
     const bR = document.getElementById('btn-right');
