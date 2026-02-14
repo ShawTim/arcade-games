@@ -153,16 +153,15 @@ class Bubble {
             ctx.drawImage(sprite, this.x - BUBBLE_RADIUS, this.y - BUBBLE_RADIUS);
         }
         
-        // 8-bit glow effect (pixelated)
+        // Subtle glow effect (circular, not square)
         if (gameState.frameCount % 4 < 2) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, BUBBLE_RADIUS + 3, 0, Math.PI * 2);
             ctx.strokeStyle = this.color;
             ctx.lineWidth = 2;
-            ctx.strokeRect(
-                this.x - BUBBLE_RADIUS - 2,
-                this.y - BUBBLE_RADIUS - 2,
-                BUBBLE_RADIUS * 2 + 4,
-                BUBBLE_RADIUS * 2 + 4
-            );
+            ctx.globalAlpha = 0.5;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
         }
     }
 
@@ -1259,6 +1258,20 @@ function setupEventListeners() {
             document.getElementById('pauseMenu').classList.toggle('hidden', !gameState.isPaused);
         } else if (e.code === 'KeyR' && gameState.isGameOver) {
             restart();
+        } else if (e.code === 'ArrowLeft' || e.code === 'KeyA') {
+            // Aim left
+            e.preventDefault();
+            gameState.aimAngle -= 0.05;
+            const minAngle = -Math.PI * 0.85;
+            const maxAngle = -Math.PI * 0.15;
+            gameState.aimAngle = Math.max(minAngle, Math.min(maxAngle, gameState.aimAngle));
+        } else if (e.code === 'ArrowRight' || e.code === 'KeyD') {
+            // Aim right
+            e.preventDefault();
+            gameState.aimAngle += 0.05;
+            const minAngle = -Math.PI * 0.85;
+            const maxAngle = -Math.PI * 0.15;
+            gameState.aimAngle = Math.max(minAngle, Math.min(maxAngle, gameState.aimAngle));
         }
     });
 }
