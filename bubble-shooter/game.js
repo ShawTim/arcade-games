@@ -1,6 +1,6 @@
 /**
- * 8-Bit Retro Bubble Shooter
- * Classic bubble shooter with authentic 8-bit arcade styling
+ * Arcade Games - Bubble Shooter
+ * 8-bit retro bubble shooter with arcade cabinet styling
  */
 
 // Game Constants
@@ -21,9 +21,6 @@ const COLORS = [
     '#ff00ff', // Magenta
     '#ff6600', // Orange
 ];
-
-// Retro color shifts for palette cycling effect
-let paletteShift = 0;
 
 // Audio Context for 8-bit sound effects
 let audioContext = null;
@@ -51,15 +48,17 @@ const gameState = {
     shotsUntilDrop: 6,
     frameCount: 0,
     screenShake: 0,
-    paletteShiftOffset: 0,
 };
 
 // Canvas Setup
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const nextCanvas = document.getElementById('nextBubble');
+const nextCtx = nextCanvas.getContext('2d');
 
 // Disable image smoothing for pixelated look
 ctx.imageSmoothingEnabled = false;
+nextCtx.imageSmoothingEnabled = false;
 
 // Pixel art bubble sprites
 const bubbleSprites = {};
@@ -391,7 +390,6 @@ function playSound(type) {
 
     switch (type) {
         case 'shoot':
-            // 8-bit pew sound
             oscillator.type = 'square';
             oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
             oscillator.frequency.exponentialRampToValueAtTime(220, audioContext.currentTime + 0.1);
@@ -402,7 +400,6 @@ function playSound(type) {
             break;
             
         case 'pop':
-            // 8-bit pop (multiple tones for satisfying feel)
             oscillator.type = 'square';
             oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
             oscillator.frequency.setValueAtTime(880, audioContext.currentTime + 0.05);
@@ -413,7 +410,6 @@ function playSound(type) {
             break;
             
         case 'bounce':
-            // 8-bit bounce
             oscillator.type = 'square';
             oscillator.frequency.setValueAtTime(330, audioContext.currentTime);
             oscillator.frequency.exponentialRampToValueAtTime(110, audioContext.currentTime + 0.08);
@@ -424,7 +420,6 @@ function playSound(type) {
             break;
             
         case 'drop':
-            // 8-bit descending arpeggio
             oscillator.type = 'sawtooth';
             const now = audioContext.currentTime;
             oscillator.frequency.setValueAtTime(440, now);
@@ -437,7 +432,6 @@ function playSound(type) {
             break;
             
         case 'gameover':
-            // 8-bit sad descending
             oscillator.type = 'sawtooth';
             const goNow = audioContext.currentTime;
             oscillator.frequency.setValueAtTime(440, goNow);
@@ -449,7 +443,6 @@ function playSound(type) {
             break;
             
         case 'levelup':
-            // 8-bit victory arpeggio
             oscillator.type = 'square';
             const luNow = audioContext.currentTime;
             [440, 554, 659, 880].forEach((freq, i) => {
@@ -467,7 +460,6 @@ function playSound(type) {
             break;
             
         case 'combo':
-            // 8-bit combo sound
             oscillator.type = 'square';
             const cNow = audioContext.currentTime;
             oscillator.frequency.setValueAtTime(523, cNow);
@@ -478,6 +470,41 @@ function playSound(type) {
             oscillator.start(cNow);
             oscillator.stop(cNow + 0.2);
             break;
+    }
+}
+
+// Draw next bubble preview
+function drawNextBubble() {
+    nextCtx.fillStyle = '#000';
+    nextCtx.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
+    
+    if (!gameState.nextBubble) return;
+    
+    const sprite = bubbleSprites[gameState.nextBubble];
+    if (sprite) {
+        const x = nextCanvas.width / 2;
+        const y = nextCanvas.height / 2;
+        
+        nextCtx.save();
+        nextCtx.translate(x, y);
+        
+        // Add bobbing animation
+        const bob = Math.sin(gameState.frameCount * 0.1) * 3;
+        nextCtx.translate(0, bob);
+        
+        // Draw sprite
+        nextCtx.drawImage(sprite, -BUBBLE_RADIUS, -BUBBLE_RADIUS);
+        
+        // Add glow
+        nextCtx.beginPath();
+        nextCtx.arc(0, 0, BUBBLE_RADIUS + 5, 0, Math.PI * 2);
+        nextCtx.strokeStyle = gameState.nextBubble;
+        nextCtx.lineWidth = 3;
+        nextCtx.globalAlpha = 0.3 + Math.sin(gameState.frameCount * 0.05) * 0.2;
+        nextCtx.stroke();
+        nextCtx.globalAlpha = 1;
+        
+        nextCtx.restore();
     }
 }
 
@@ -850,8 +877,7 @@ function levelComplete() {
     const bonus = gameState.shots < 10 ? 1000 : gameState.shots < 20 ? 500 : 100;
     gameState.score += bonus;
     
-    document.getElementById('levelBonus').textContent = bonus;
-    document.getElementById('levelComplete').classList.remove('hidden');
+    showOverlay('levelComplete', `LEVEL ${gameState.level} CLEAR!<br>BONUS: +${bonus}`);
     playSound('levelup');
     updateUI();
 }
@@ -863,7 +889,7 @@ function nextLevel() {
     gameState.shotsUntilDrop = Math.max(4, 6 - Math.floor(gameState.level / 3));
     gameState.gridOffset = 0;
     
-    document.getElementById('levelComplete').classList.add('hidden');
+    hideOverlay('levelComplete');
     
     initGrid();
     gameState.currentBubble = getRandomColor();
@@ -882,8 +908,7 @@ function gameOver() {
         localStorage.setItem('bubbleShooterHighScore', gameState.highScore);
     }
     
-    document.getElementById('finalScore').textContent = gameState.score;
-    document.getElementById('gameOver').classList.remove('hidden');
+    showOverlay('gameOver', `GAME OVER<br>FINAL SCORE: ${gameState.score}`);
     playSound('gameover');
 }
 
@@ -901,8 +926,8 @@ function restart() {
     gameState.projectile = null;
     gameState.screenShake = 0;
 
-    document.getElementById('gameOver').classList.add('hidden');
-    document.getElementById('pauseMenu').classList.add('hidden');
+    hideOverlay('gameOver');
+    hideOverlay('pauseMenu');
 
     initGrid();
     gameState.currentBubble = getRandomColor();
@@ -912,8 +937,55 @@ function restart() {
     updateUI();
 }
 
+// Overlay Management
+function showOverlay(id, message) {
+    const overlayDiv = document.createElement('div');
+    overlayDiv.id = id;
+    overlayDiv.className = 'overlay';
+    
+    const content = document.createElement('div');
+    content.className = 'overlay-content';
+    
+    const text = document.createElement('h2');
+    text.innerHTML = message;
+    content.appendChild(text);
+    
+    const button = document.createElement('button');
+    if (id === 'gameOver') {
+        button.textContent = 'PLAY AGAIN';
+        button.onclick = restart;
+    } else if (id === 'levelComplete') {
+        button.textContent = 'NEXT LEVEL';
+        button.onclick = nextLevel;
+    } else if (id === 'pauseMenu') {
+        button.textContent = 'RESUME';
+        button.onclick = togglePause;
+    }
+    content.appendChild(button);
+    
+    overlayDiv.appendChild(content);
+    document.querySelector('.screen-bezel').appendChild(overlayDiv);
+}
+
+function hideOverlay(id) {
+    const overlay = document.getElementById(id);
+    if (overlay) overlay.remove();
+}
+
+function togglePause() {
+    gameState.isPaused = !gameState.isPaused;
+    
+    if (gameState.isPaused) {
+        showOverlay('pauseMenu', 'PAUSED');
+    } else {
+        hideOverlay('pauseMenu');
+    }
+}
+
 // Input Handling
 function handleMouseMove(e) {
+    if (!gameState.isPlaying || gameState.isPaused) return;
+    
     const rect = canvas.getBoundingClientRect();
     const scaleX = CANVAS_WIDTH / rect.width;
     const scaleY = CANVAS_HEIGHT / rect.height;
@@ -933,6 +1005,8 @@ function handleMouseMove(e) {
 
 function handleTouch(e) {
     e.preventDefault();
+    if (!gameState.isPlaying || gameState.isPaused) return;
+    
     const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
     const scaleX = CANVAS_WIDTH / rect.width;
@@ -963,7 +1037,7 @@ function drawBackground() {
     // Scanline background effect
     const scanlineOffset = (gameState.frameCount * 2) % 4;
     
-    // Base gradient with palette shift
+    // Base gradient
     const shift = Math.sin(gameState.frameCount * 0.02) * 0.1;
     const gradient = ctx.createRadialGradient(
         CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, 0,
@@ -1055,27 +1129,6 @@ function drawShooter() {
             ctx.drawImage(sprite, x - BUBBLE_RADIUS, y - BUBBLE_RADIUS + bob);
         }
     }
-
-    // Draw next bubble preview
-    const previewX = CANVAS_WIDTH - 50;
-    const previewY = CANVAS_HEIGHT - 50;
-    
-    // 8-bit label
-    ctx.font = '10px "Press Start 2P", monospace';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-    ctx.textAlign = 'center';
-    ctx.fillText('NEXT', previewX, previewY - 25);
-
-    if (gameState.nextBubble) {
-        const sprite = bubbleSprites[gameState.nextBubble];
-        if (sprite) {
-            ctx.save();
-            ctx.translate(previewX, previewY);
-            ctx.scale(0.7, 0.7);
-            ctx.drawImage(sprite, -BUBBLE_RADIUS, -BUBBLE_RADIUS);
-            ctx.restore();
-        }
-    }
 }
 
 function drawGrid() {
@@ -1143,6 +1196,9 @@ function draw() {
     }
     
     ctx.restore();
+    
+    // Draw next bubble preview
+    drawNextBubble();
 }
 
 // Game Loop
@@ -1223,25 +1279,53 @@ function setupEventListeners() {
     canvas.addEventListener('touchmove', handleTouch, { passive: false });
     canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
 
-    // Button controls
-    document.getElementById('restartBtn').addEventListener('click', restart);
-    document.getElementById('nextLevelBtn').addEventListener('click', nextLevel);
+    // Touch button controls
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+    const btnShoot = document.getElementById('btn-shoot');
     
-    document.getElementById('pauseBtn').addEventListener('click', () => {
-        gameState.isPaused = !gameState.isPaused;
-        document.getElementById('pauseMenu').classList.toggle('hidden', !gameState.isPaused);
-    });
+    if (btnLeft) {
+        btnLeft.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const interval = setInterval(() => {
+                gameState.aimAngle -= 0.05;
+                const minAngle = -Math.PI * 0.85;
+                const maxAngle = -Math.PI * 0.15;
+                gameState.aimAngle = Math.max(minAngle, Math.min(maxAngle, gameState.aimAngle));
+            }, 50);
+            btnLeft.dataset.interval = interval;
+        });
+        btnLeft.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            clearInterval(btnLeft.dataset.interval);
+        });
+    }
     
-    document.getElementById('resumeBtn').addEventListener('click', () => {
-        gameState.isPaused = false;
-        document.getElementById('pauseMenu').classList.add('hidden');
-    });
-
-    document.getElementById('soundBtn').addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
-        document.getElementById('soundBtn').classList.toggle('muted', !soundEnabled);
-        document.getElementById('soundBtn').textContent = soundEnabled ? '🔊' : '🔇';
-    });
+    if (btnRight) {
+        btnRight.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const interval = setInterval(() => {
+                gameState.aimAngle += 0.05;
+                const minAngle = -Math.PI * 0.85;
+                const maxAngle = -Math.PI * 0.15;
+                gameState.aimAngle = Math.max(minAngle, Math.min(maxAngle, gameState.aimAngle));
+            }, 50);
+            btnRight.dataset.interval = interval;
+        });
+        btnRight.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            clearInterval(btnRight.dataset.interval);
+        });
+    }
+    
+    if (btnShoot) {
+        btnShoot.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (!audioContext) initAudio();
+            if (audioContext?.state === 'suspended') audioContext.resume();
+            shoot();
+        });
+    }
 
     // Prevent context menu on canvas
     canvas.addEventListener('contextmenu', e => e.preventDefault());
@@ -1254,19 +1338,19 @@ function setupEventListeners() {
             if (audioContext?.state === 'suspended') audioContext.resume();
             shoot();
         } else if (e.code === 'Escape') {
-            gameState.isPaused = !gameState.isPaused;
-            document.getElementById('pauseMenu').classList.toggle('hidden', !gameState.isPaused);
+            e.preventDefault();
+            if (gameState.isPlaying && !gameState.isGameOver) {
+                togglePause();
+            }
         } else if (e.code === 'KeyR' && gameState.isGameOver) {
             restart();
         } else if (e.code === 'ArrowLeft' || e.code === 'KeyA') {
-            // Aim left
             e.preventDefault();
             gameState.aimAngle -= 0.05;
             const minAngle = -Math.PI * 0.85;
             const maxAngle = -Math.PI * 0.15;
             gameState.aimAngle = Math.max(minAngle, Math.min(maxAngle, gameState.aimAngle));
         } else if (e.code === 'ArrowRight' || e.code === 'KeyD') {
-            // Aim right
             e.preventDefault();
             gameState.aimAngle += 0.05;
             const minAngle = -Math.PI * 0.85;
