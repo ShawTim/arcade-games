@@ -1065,7 +1065,7 @@ function drawShooter() {
     ctx.font = '10px "Press Start 2P", monospace';
     ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
     ctx.textAlign = 'center';
-    ctx.fillText('下一個', previewX, previewY - 25);
+    ctx.fillText('NEXT', previewX, previewY - 25);
 
     if (gameState.nextBubble) {
         const sprite = bubbleSprites[gameState.nextBubble];
@@ -1118,7 +1118,7 @@ function draw() {
             ctx.textAlign = 'center';
             ctx.shadowColor = '#ff0044';
             ctx.shadowBlur = flash ? 10 : 5;
-            ctx.fillText(`天花板下降倒數 ${remaining}`, CANVAS_WIDTH / 2, 30);
+            ctx.fillText(`CEILING DROP IN ${remaining}`, CANVAS_WIDTH / 2, 30);
             ctx.shadowBlur = 0;
         }
     }

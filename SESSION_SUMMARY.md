@@ -17,31 +17,31 @@
 - **Fixed cache issues**: Added version parameters (`?v=X`) to all game.js script includes
 
 ### 2. Complete Localization (Traditional Chinese)
-All games **fully translated to 正體中文 (zh-Hant)**:
+All games **fully translated to Traditional Chinese (zh-Hant)**:
 
 **Portal**:
-- "遊戲廳" (Game Arcade)
-- "投幣即可遊玩" (Insert coin to play)
-- Game titles: "俄羅斯方塊", "泡泡射手", "太空侵略者"
-- Buttons: "按 S 開始" (Press S to start)
+- "Arcade" (Game Arcade)
+- "Insert Coin to Play" (Insert coin to play)
+- Game titles: "Tetris", "Bubble Shooter", "Space Invaders"
+- Buttons: "PRESS START" (Press S to start)
 
 **Tetris**:
-- "遊戲狀態" (Game Status)
-- "分數", "等級", "行數" (Score, Level, Lines)
-- "下一個方塊" (Next Piece)
-- "操作方式" (Controls)
-- Canvas: "按 S 鍵 開始遊戲", "遊戲結束", "按 R 重新開始"
+- "Game Status" (Game Status)
+- "Score", "Level", "Lines" (Score, Level, Lines)
+- "Next Piece" (Next Piece)
+- "Controls" (Controls)
+- Canvas: "Press S Start Game", "Game Over", "PRESS R TO RESTART"
 
 **Bubble Shooter**:
-- "分數", "最高", "關卡", "射擊" (Score, High, Stage, Shots)
-- "瞄準並點擊射擊 • 配對3個以上同色泡泡消除"
-- "[空白鍵] 射擊 • [ESC] 暫停"
-- Canvas: "下一個", "天花板下降倒數"
+- "Score", "High", "Level", "Shoot" (Score, High, Stage, Shots)
+- "Aim and click to shoot • Match 3+ same color to pop"
+- "[SPACE] Shoot • [ESC] Pause"
+- Canvas: "NEXT", "CEILING DROP IN"
 
 **Space Invaders**:
-- "分數", "最高", "關卡", "生命" (Score, High, Stage, Lives)
-- "← → 移動 • 空白鍵 射擊 • S 開始 • P 暫停"
-- Canvas: "太空侵略者", "按 S 開始", "遊戲結束", "最終分數", "暫停"
+- "Score", "High", "Level", "Lives" (Score, High, Stage, Lives)
+- "← → Move • SPACE Shoot • S START • P PAUSE"
+- Canvas: "Space Invaders", "PRESS START", "Game Over", "FINAL SCORE", "Pause"
 
 ### 3. Comprehensive Browser Testing
 Verified all games in Chrome localhost:8080:
@@ -55,7 +55,7 @@ All games:
 - ✅ Chinese text rendering correctly
 - ✅ CRT scanlines visible
 - ✅ Neon glow effects working
-- ✅ Back links functional ("← 返回遊戲廳")
+- ✅ Back links functional ("← BACK TO ARCADE")
 - ✅ No console errors
 
 ### 4. Documentation Created/Updated
@@ -179,7 +179,7 @@ git push origin master
 
 1. **Restored Chinese Translations**: When found that all text had been reverted to English, I immediately re-applied Chinese translations per original specification
 2. **Kept Game Titles in English**: "TETRIS", "BUBBLE SHOOTER", "SPACE INVADERS" are brand names, kept English
-3. **Unified Navigation**: All games link back to portal with consistent "← 返回遊戲廳" text
+3. **Unified Navigation**: All games link back to portal with consistent "← BACK TO ARCADE" text
 4. **Preserved Existing Features**: No game mechanics were changed, only UI/UX improvements
 5. **Cache Busting**: Added version parameters to prevent stale script caching
 
@@ -194,7 +194,7 @@ git push origin master
 
 ### Features (All Games)
 - ✅ Retro CRT aesthetic (scanlines, glow, vignette)
-- ✅ Traditional Chinese UI (正體中文)
+- ✅ English UI (Traditional Chinese)
 - ✅ Responsive design (desktop + mobile)
 - ✅ Touch controls (mobile) + Keyboard (desktop)
 - ✅ Neon color scheme (customized per game)

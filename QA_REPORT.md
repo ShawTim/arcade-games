@@ -12,7 +12,7 @@
 All three arcade games are **fully functional and tested**. Portal and games are **100% localized to Traditional Chinese (zh-Hant)** per project specification. All games feature:
 
 ✅ **Retro CRT Aesthetic**: Scanlines, neon glow, pixel art  
-✅ **Traditional Chinese UI**: All user-facing text in 正體中文  
+✅ **English UI**: All user-facing text in Traditional Chinese  
 ✅ **Responsive Design**: Desktop keyboard + mobile touch controls  
 ✅ **Pure HTML5/CSS3/JS**: No frameworks, GitHub Pages compatible  
 ✅ **Cross-game Consistency**: Fonts, colors, navigation, layouts  
@@ -35,11 +35,11 @@ All three arcade games are **fully functional and tested**. Portal and games are
 **HTML Structure**: `lang="zh-Hant"` ✅
 
 **Chinese Text Rendering**:
-- Title: "遊戲廳" ✅
-- Subtitle: "投幣即可遊玩" ✅
-- Game Labels: "俄羅斯方塊", "泡泡射手", "太空侵略者" ✅
-- Button Text: "按 S 開始" ✅
-- Footer: "復古遊戲廳 - RETRO ARCADE ❤️" ✅
+- Title: "Arcade" ✅
+- Subtitle: "Insert Coin to Play" ✅
+- Game Labels: "Tetris", "Bubble Shooter", "Space Invaders" ✅
+- Button Text: "PRESS START" ✅
+- Footer: "Retro Arcade - RETRO ARCADE ❤️" ✅
 
 **Visual Design**: 
 - 3 arcade cabinets with neon borders (pink-cyan, green, orange) ✅
@@ -53,19 +53,19 @@ All three arcade games are **fully functional and tested**. Portal and games are
 
 ## Game-by-Game Testing
 
-### 1. Tetris (俄羅斯方塊)
+### 1. Tetris (Tetris)
 
 **URL**: `http://localhost:8080/tetris/?v=12`
 
 **Chinese Localization** (lang="zh-Hant"):
-- Page Title: "俄羅斯方塊 — 復古遊戲廳" ✅
-- Game Status section: "遊戲狀態" ✅
-- Labels: "分數", "等級", "行數" ✅
-- Next Piece: "下一個方塊" ✅
-- Controls section: "操作方式" ✅
-- Control labels: "移動", "下降", "旋轉", "開始遊戲", "暫停", "重新開始" ✅
-- Back link: "← 返回遊戲廳" ✅
-- Touch button: "旋轉" ✅
+- Page Title: "Tetris — Retro Arcade" ✅
+- Game Status section: "Game Status" ✅
+- Labels: "Score", "Level", "Lines" ✅
+- Next Piece: "Next Piece" ✅
+- Controls section: "Controls" ✅
+- Control labels: "Move", "Drop", "Rotate", "Start Game", "Pause", "Restart" ✅
+- Back link: "← BACK TO ARCADE" ✅
+- Touch button: "Rotate" ✅
 
 **Game Mechanics**:
 - ✅ Tetris pieces spawn and fall correctly
@@ -77,9 +77,9 @@ All three arcade games are **fully functional and tested**. Portal and games are
 - ✅ Restart (R key or button)
 
 **Canvas Text** (game.js):
-- Start screen: "按 S 鍵 開始遊戲" (blinking) ✅
-- Game over: "遊戲結束" ✅
-- Restart prompt: "點擊重新開始" (mobile) / "按 R 重新開始" (desktop) ✅
+- Start screen: "Press S Start Game" (blinking) ✅
+- Game over: "Game Over" ✅
+- Restart prompt: "TAP TO RESTART" (mobile) / "PRESS R TO RESTART" (desktop) ✅
 
 **Aesthetics**:
 - ✅ Cyan borders on game area and info sections
@@ -95,20 +95,20 @@ All three arcade games are **fully functional and tested**. Portal and games are
 
 ---
 
-### 2. Bubble Shooter (泡泡射手)
+### 2. Bubble Shooter (Bubble Shooter)
 
 **URL**: `http://localhost:8080/bubble-shooter/?v=13`
 
 **Chinese Localization** (lang="zh-Hant"):
-- Page Title: "泡泡射手 - Arcade Collection" ✅
-- Back link: "← 返回遊戲廳" ✅
-- Stat labels: "分數", "最高", "關卡", "射擊" ✅
-- Instructions: "瞄準並點擊射擊 • 配對3個以上同色泡泡消除" ✅
-- Keyboard controls: "[空白鍵] 射擊 • [ESC] 暫停" ✅
+- Page Title: "Bubble Shooter - Arcade Collection" ✅
+- Back link: "← BACK TO ARCADE" ✅
+- Stat labels: "Score", "High", "Level", "Shoot" ✅
+- Instructions: "Aim and click to shoot • Match 3+ same color to pop" ✅
+- Keyboard controls: "[SPACE] Shoot • [ESC] Pause" ✅
 
 **Canvas Text** (game.js - **v=2 with cache busting**):
-- Next bubble preview: "下一個" ✅
-- Ceiling warning: "天花板下降倒數 X" ✅
+- Next bubble preview: "NEXT" ✅
+- Ceiling warning: "CEILING DROP IN X" ✅
 
 **Game Mechanics**:
 - ✅ Hex-grid bubble layout
@@ -123,9 +123,9 @@ All three arcade games are **fully functional and tested**. Portal and games are
 - ✅ Game over and level complete screens
 
 **Overlays** (game.js):
-- Game Over: "遊戲結束" + "最終分數: X" + "再玩一次" button ✅
-- Level Complete: "過關！" + "獎勵: X" + "下一關" button ✅
-- Pause Menu: "暫停" + "繼續" button ✅
+- Game Over: "Game Over" + "FINAL SCORE: X" + "Play Again" button ✅
+- Level Complete: "LEVEL CLEAR!" + "BONUS: X" + "NEXT LEVEL" button ✅
+- Pause Menu: "Pause" + "Resume" button ✅
 
 **Aesthetics**:
 - ✅ Cyan pixel borders on game container
@@ -140,25 +140,25 @@ All three arcade games are **fully functional and tested**. Portal and games are
 
 ---
 
-### 3. Space Invaders (太空侵略者)
+### 3. Space Invaders (Space Invaders)
 
 **URL**: `http://localhost:8080/space-invaders/?v=13`
 
 **Chinese Localization** (lang="zh-Hant"):
-- Page Title: "太空侵略者 — 復古遊戲廳" ✅
-- Back link: "← 返回遊戲廳" ✅
-- Stat labels: "分數", "最高", "關卡", "生命" ✅
-- Instructions: "← → 移動 • 空白鍵 射擊 • S 開始 • P 暫停" ✅
-- Fire button: "射擊" ✅
+- Page Title: "Space Invaders — Retro Arcade" ✅
+- Back link: "← BACK TO ARCADE" ✅
+- Stat labels: "Score", "High", "Level", "Lives" ✅
+- Instructions: "← → Move • SPACE Shoot • S START • P PAUSE" ✅
+- Fire button: "Shoot" ✅
 
 **Canvas Text** (game.js - **v=2 with cache busting**):
-- Start screen: "太空侵略者" (in orange) ✅
-- Start prompt: "按 S 開始" (blinking) ✅
-- Game over: "遊戲結束" ✅
-- Final score: "最終分數: X" ✅
-- Restart: "點擊重新開始" (mobile) / "按 S 重新開始" (desktop) ✅
-- High score display: "最高分: X" ✅
-- Pause: "暫停" ✅
+- Start screen: "Space Invaders" (in orange) ✅
+- Start prompt: "PRESS START" (blinking) ✅
+- Game over: "Game Over" ✅
+- Final score: "FINAL SCORE: X" ✅
+- Restart: "TAP TO RESTART" (mobile) / "PRESS S TO RESTART" (desktop) ✅
+- High score display: "HIGH SCORE: X" ✅
+- Pause: "Pause" ✅
 
 **Game Mechanics**:
 - ✅ 5 rows of enemies (pink top, cyan middle, orange bottom)
@@ -190,7 +190,7 @@ All three arcade games are **fully functional and tested**. Portal and games are
 ## Internationalization (i18n)
 
 ### Language Support
-- **Current**: Traditional Chinese (正體中文, `lang="zh-Hant"`) ✅
+- **Current**: Traditional Chinese (Traditional Chinese, `lang="zh-Hant"`) ✅
 - All user-facing text localized
 - Game titles kept in English (brand names acceptable)
 - Version numbers/technical labels (VER 1.0) left as-is
@@ -216,13 +216,13 @@ All three arcade games are **fully functional and tested**. Portal and games are
 | **Primary Color** | Cyan | Cyan | Orange |
 | **Accent Color** | Pink | Green (cabinet header) | Orange |
 | **CRT Effects** | Scanlines (CSS) | Scanlines + glow + vignette (CSS) | Scanlines (CSS) |
-| **Back Link** | "← 返回遊戲廳" | "← 返回遊戲廳" | "← 返回遊戲廳" |
+| **Back Link** | "← BACK TO ARCADE" | "← BACK TO ARCADE" | "← BACK TO ARCADE" |
 | **Stat Boxes** | ✅ Present | ✅ Present | ✅ Present |
 | **Mobile Touch** | ✅ Buttons | ✅ Tap to aim | ✅ Buttons |
 
 ### Navigation
 - Portal → All 3 games: ✅ Links working
-- All games → Portal: ✅ "← 返回遊戲廳" links working
+- All games → Portal: ✅ "← BACK TO ARCADE" links working
 - Keyboard shortcuts (S, P, etc.): ✅ Consistent across games
 
 ---
@@ -262,7 +262,7 @@ All three arcade games are **fully functional and tested**. Portal and games are
 6. **Missing lang attributes**: ✅ Added `lang="zh-Hant"` to all HTML files
 
 ### Secondary Issues Fixed
-7. **Bubble Shooter canvas text in English**: ✅ Translated "NEXT" → "下一個", "CEILING DROP IN" → "天花板下降倒數"
+7. **Bubble Shooter canvas text in English**: ✅ Translated "NEXT" → "NEXT", "CEILING DROP IN" → "CEILING DROP IN"
 8. **Space Invaders canvas text in English**: ✅ Translated all prompts, labels, and messages
 9. **Tetris canvas text inconsistency**: ✅ Aligned all game-over and start screens with Chinese
 10. **Portal text all English**: ✅ Translated marquee, game labels, footer

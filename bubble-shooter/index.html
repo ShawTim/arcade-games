@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="8-Bit Retro Bubble Shooter - Classic arcade bubble popping game with authentic 8-bit visuals">
     <meta name="theme-color" content="#00ffff">
-    <title>泡泡射手 - Arcade Collection</title>
+    <title>BUBBLE SHOOTER - Arcade Collection</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='10' y='10' width='80' height='80' fill='%2300ffff'/><rect x='20' y='20' width='60' height='60' fill='%23000'/></svg>">
 </head>
@@ -17,25 +17,25 @@
         <div class="star-field" id="starField"></div>
         <div class="game-wrapper">
             <div style="text-align: center; margin-bottom: 10px;">
-                <a href="../index.html" style="color: #ff00ff; text-decoration: none; font-family: 'Press Start 2P', cursive; font-size: 0.7rem; letter-spacing: 1px;">← 返回遊戲廳</a>
+                <a href="../index.html" style="color: #ff00ff; text-decoration: none; font-family: 'Press Start 2P', cursive; font-size: 0.7rem; letter-spacing: 1px;">← BACK TO ARCADE</a>
             </div>
             <header class="game-header">
                 <h1 class="neon-title">▼ BUBBLE SHOOTER ▼</h1>
                 <div class="stats">
                     <div class="stat-box">
-                        <span class="stat-label">分數</span>
+                        <span class="stat-label">SCORE</span>
                         <span id="score" class="stat-value neon-text">0</span>
                     </div>
                     <div class="stat-box">
-                        <span class="stat-label">最高</span>
+                        <span class="stat-label">HIGH</span>
                         <span id="highScore" class="stat-value neon-text">0</span>
                     </div>
                     <div class="stat-box">
-                        <span class="stat-label">關卡</span>
+                        <span class="stat-label">LEVEL</span>
                         <span id="level" class="stat-value neon-text">1</span>
                     </div>
                     <div class="stat-box">
-                        <span class="stat-label">射擊</span>
+                        <span class="stat-label">SHOTS</span>
                         <span id="shots" class="stat-value neon-text">0</span>
                     </div>
                 </div>
@@ -45,35 +45,35 @@
                 <canvas id="gameCanvas"></canvas>
                 <div id="gameOver" class="overlay hidden">
                     <div class="overlay-content">
-                        <h2 class="neon-title">遊戲結束</h2>
-                        <p class="final-score">最終分數: <span id="finalScore">0</span></p>
-                        <button id="restartBtn" class="neon-button">再玩一次</button>
-                        <p style="margin-top: 15px; font-size: 0.7rem; color: rgba(255,255,255,0.5);">按 [R] 重新開始</p>
+                        <h2 class="neon-title">GAME OVER</h2>
+                        <p class="final-score">FINAL SCORE: <span id="finalScore">0</span></p>
+                        <button id="restartBtn" class="neon-button">PLAY AGAIN</button>
+                        <p style="margin-top: 15px; font-size: 0.7rem; color: rgba(255,255,255,0.5);">PRESS [R] TO RESTART</p>
                     </div>
                 </div>
                 <div id="levelComplete" class="overlay hidden">
                     <div class="overlay-content">
-                        <h2 class="neon-title">過關！</h2>
-                        <p class="level-score">獎勵: <span id="levelBonus">0</span></p>
-                        <button id="nextLevelBtn" class="neon-button">下一關</button>
+                        <h2 class="neon-title">LEVEL CLEAR!</h2>
+                        <p class="level-score">BONUS: <span id="levelBonus">0</span></p>
+                        <button id="nextLevelBtn" class="neon-button">NEXT LEVEL</button>
                     </div>
                 </div>
                 <div id="pauseMenu" class="overlay hidden">
                     <div class="overlay-content">
-                        <h2 class="neon-title">暫停</h2>
-                        <button id="resumeBtn" class="neon-button">繼續</button>
+                        <h2 class="neon-title">PAUSED</h2>
+                        <button id="resumeBtn" class="neon-button">RESUME</button>
                     </div>
                 </div>
             </div>
             
             <div class="controls">
-                <button id="pauseBtn" class="control-btn" title="暫停 (ESC)">⏸</button>
-                <button id="soundBtn" class="control-btn" title="切換音效">🔊</button>
+                <button id="pauseBtn" class="control-btn" title="PAUSE (ESC)">⏸</button>
+                <button id="soundBtn" class="control-btn" title="TOGGLE SOUND">🔊</button>
             </div>
             
             <div class="instructions">
-                <p>► 瞄準並點擊射擊 • 配對3個以上同色泡泡消除 ◄</p>
-                <p style="font-size: 0.9rem; margin-top: 5px;">[空白鍵] 射擊 • [ESC] 暫停</p>
+                <p>► AIM &amp; CLICK TO SHOOT • MATCH 3+ SAME COLOR TO POP ◄</p>
+                <p style="font-size: 0.9rem; margin-top: 5px;">[SPACE] SHOOT • [ESC] PAUSE</p>
             </div>
         </div>
     </div>
