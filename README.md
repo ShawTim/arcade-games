@@ -1,63 +1,95 @@
 # Arcade Games 🕹️
 
-A collection of retro arcade games built with pure JavaScript and HTML5 Canvas. No frameworks, no dependencies — just code and pixels.
+A collection of retro arcade games, entirely **vibe coded** — designed and built through AI-assisted development from concept to completion. No manual pixel-pushing, no copy-pasting tutorials. Just vibes, prompts, and iteration.
 
-**Play Now**: [shawtim.github.io/arcade-games](https://shawtim.github.io/arcade-games)
+**Play**: [shawtim.github.io/arcade-games](https://shawtim.github.io/arcade-games)
 
 ---
 
 ## 🎮 Games
 
-### Tetris
-The classic block-stacking puzzle. SRS rotation with wall kicks, 10-level progression, increasing speed.
+| Game | Description |
+|------|-------------|
+| [**Tetris**](https://shawtim.github.io/arcade-games/tetris/) | Classic block-stacking. SRS rotation, wall kicks, 10 levels. |
+| [**Bubble Shooter**](https://shawtim.github.io/arcade-games/bubble-shooter/) | Aim, bounce, match 3+. Physics-based trajectory with wall reflections. |
+| [**Space Invaders**](https://shawtim.github.io/arcade-games/space-invaders/) | Defend Earth. Descending alien waves, dodge and shoot. |
 
-### Bubble Shooter
-Aim and fire colored bubbles to match 3+. Physics-based aiming with bounce off walls.
-
-### Space Invaders
-Defend Earth against waves of descending aliens. Dodge bullets, destroy the fleet.
+All games share a unified **retro arcade cabinet** aesthetic — CRT scanlines, neon glow, pixel fonts, stegosaurus background (don't ask).
 
 ---
 
-## ✨ Highlights
+## 🤖 Vibe Coded
 
-- 🎨 **Retro arcade cabinet aesthetic** — CRT scanlines, neon glows, pixel fonts
-- 📱 **Mobile-friendly** — Touch controls on all games
-- ⚡ **Zero dependencies** — Pure HTML5 Canvas + vanilla JS
-- 🧩 **Modular** — Each game is self-contained, easy to add more
+This entire project was built through **vibe coding** — a workflow where:
 
-## 🎮 Controls
+1. **AI generates the code** from high-level descriptions and iterative feedback
+2. **Human provides direction** — game feel, visual style, what's fun and what isn't
+3. **No boilerplate, no frameworks** — every line exists because it was prompted into being
 
-| Key | Action |
-|-----|--------|
-| ← → | Move |
-| ↑ / Space | Rotate / Fire |
-| ↓ | Drop / Aim |
-| S | Start |
-| P | Pause |
+The [SKILL.md](./SKILL.md) defines the project's style guide and constraints. Think of it as a creative brief that keeps every game consistent.
 
-**Mobile**: On-screen touch buttons.
+### Why vibe code?
+
+- Proves AI can ship real, playable games — not just demos
+- Every game is self-contained and readable (no framework magic)
+- Fast iteration: concept → playable in hours, not weeks
+- The constraint of "no dependencies" forces clean architecture
+
+---
+
+## ✨ Shared Style
+
+Every game in this collection follows the same visual DNA:
+
+- 🖥️ **CRT cabinet frame** with scanline overlay
+- 🎨 **Neon color palette** — cyan, magenta, yellow on dark
+- 🔤 **Pixel fonts** — Press Start 2P / VT323
+- 📱 **Mobile-first** — touch controls, responsive layout
+- 🦕 **Stegosaurus** — the unofficial mascot (again, don't ask)
 
 ---
 
 ## 🛠️ Tech
 
-- **HTML5 Canvas** for rendering
-- **Vanilla JavaScript** — no build tools, no bundlers
-- **CSS3** — responsive layout, animations
+```
+HTML5 Canvas + Vanilla JavaScript + CSS3
+```
 
-Each game follows the same architecture: game loop → state update → render. Clean separation of concerns, readable code.
+That's it. No React, no bundlers, no npm install. Open `index.html` and play.
+
+### Architecture (per game)
+
+```
+game.js    → Game loop, state, logic, rendering (all-in-one)
+index.html → Canvas + UI elements
+style.css  → Cabinet frame, responsive layout, effects
+```
+
+Each game is a single `game.js` that handles everything. Simple, readable, hackable.
 
 ---
 
-## Run Locally
+## 🚀 Run Locally
 
 ```bash
 git clone https://github.com/ShawTim/arcade-games.git
 cd arcade-games
 python3 -m http.server 8000
-# Open http://localhost:8000
 ```
+
+Then open [localhost:8000](http://localhost:8000) for the game select screen, or go directly to any game's folder.
+
+---
+
+## 🎯 Adding a New Game
+
+Follow the [SKILL.md](./SKILL.md) — it defines the rules for adding games to this collection. TL;DR:
+
+1. Create `your-game/` with `game.js`, `index.html`, `style.css`
+2. Match the cabinet aesthetic (CRT frame, neon palette, pixel font)
+3. Include mobile controls
+4. Zero dependencies
+5. Add to the lobby (`index.html` at root)
 
 ---
 
@@ -67,4 +99,4 @@ MIT
 
 ---
 
-Built by [ShawTim](https://github.com/ShawTim)
+Vibe coded by [ShawTim](https://github.com/ShawTim) 🎮
