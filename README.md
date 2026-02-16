@@ -1,93 +1,70 @@
 # Arcade Games 🕹️
 
-A collection of retro arcade games built with vanilla JavaScript and CSS. Currently featuring **Tetris** — the classic block-stacking puzzle game.
+A collection of retro arcade games built with pure JavaScript and HTML5 Canvas. No frameworks, no dependencies — just code and pixels.
 
-**Live Demo**: [shawtim.github.io/arcade-games](https://shawtim.github.io/arcade-games)
+**Play Now**: [shawtim.github.io/arcade-games](https://shawtim.github.io/arcade-games)
 
 ---
 
-## 🎮 Play Now
+## 🎮 Games
 
-No installation needed. Just visit the [live demo](https://shawtim.github.io/arcade-games) or run locally:
+### Tetris
+The classic block-stacking puzzle. SRS rotation with wall kicks, 10-level progression, increasing speed.
+
+### Bubble Shooter
+Aim and fire colored bubbles to match 3+. Physics-based aiming with bounce off walls.
+
+### Space Invaders
+Defend Earth against waves of descending aliens. Dodge bullets, destroy the fleet.
+
+---
+
+## ✨ Highlights
+
+- 🎨 **Retro arcade cabinet aesthetic** — CRT scanlines, neon glows, pixel fonts
+- 📱 **Mobile-friendly** — Touch controls on all games
+- ⚡ **Zero dependencies** — Pure HTML5 Canvas + vanilla JS
+- 🧩 **Modular** — Each game is self-contained, easy to add more
+
+## 🎮 Controls
+
+| Key | Action |
+|-----|--------|
+| ← → | Move |
+| ↑ / Space | Rotate / Fire |
+| ↓ | Drop / Aim |
+| S | Start |
+| P | Pause |
+
+**Mobile**: On-screen touch buttons.
+
+---
+
+## 🛠️ Tech
+
+- **HTML5 Canvas** for rendering
+- **Vanilla JavaScript** — no build tools, no bundlers
+- **CSS3** — responsive layout, animations
+
+Each game follows the same architecture: game loop → state update → render. Clean separation of concerns, readable code.
+
+---
+
+## Run Locally
 
 ```bash
+git clone https://github.com/ShawTim/arcade-games.git
+cd arcade-games
 python3 -m http.server 8000
 # Open http://localhost:8000
 ```
 
-### Controls
+---
 
-| Key | Action |
-|-----|--------|
-| ← / → | Move left / right |
-| ↓ | Soft drop |
-| ↑ / Space | Rotate piece |
-| S | Start game |
-| P | Pause |
-| R | Restart (when game over) |
+## License
 
-**Mobile**: Tap on-screen buttons — left, down, right arrows and ROTATE.
+MIT
 
 ---
 
-## ✨ Features
-
-- 🎯 **Classic Tetris gameplay** — SRS rotation system with wall kicks
-- 📱 **Mobile-friendly** — Touch controls and responsive layout
-- 🎨 **Retro arcade aesthetic** — CRT scanlines, neon glows, pixel fonts
-- ⚡ **Zero dependencies** — Pure HTML5 Canvas + vanilla JS
-- 🖱️ **Keyboard & touch support** — Play on desktop or mobile
-
----
-
-## 🛠️ Tech Stack
-
-- **HTML5 Canvas** — 2D rendering
-- **Vanilla JavaScript** — No frameworks, no build tools
-- **CSS3** — Flexbox, animations, responsive design
-
-**Why no frameworks?** This project is built to demonstrate core programming fundamentals — game loops, collision detection, state management — without framework abstractions. It also deploys anywhere with zero setup.
-
----
-
-## 🏗️ Architecture
-
-```
-TetrisGame (Main Controller)
-├── GameState          # Score, level, game status
-├── Board              # 10x20 grid, collision detection
-├── Piece              # Tetromino shapes & rotation
-├── Renderer           # Canvas drawing
-└── InputController    # Keyboard + touch events
-```
-
-The modular design makes it easy to add new games or features. Each class has a single responsibility and minimal coupling.
-
----
-
-## 📝 Development Notes
-
-This project was built using **vibe coding** — iterating quickly with AI assistance while maintaining clean, readable code. The focus is on:
-
-- **Simplicity** over clever tricks
-- **Readability** over premature optimization  
-- **Playability** over complex features
-
----
-
-## 🚀 Future Ideas
-
-- [ ] Add more classic games (Snake, Pong, etc.)
-- [ ] Sound effects and music
-- [ ] High score persistence
-- [ ] Dark/light theme toggle
-
----
-
-## 📄 License
-
-MIT — Feel free to fork and modify.
-
----
-
-Built with 💙 by [ShawTim](https://github.com/ShawTim)
+Built by [ShawTim](https://github.com/ShawTim)
